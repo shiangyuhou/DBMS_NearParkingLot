@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map Example</title>
+    <!-- Include Leaflet CSS and JS files -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+    <!-- Map container -->
+    <div id="map" style="height: 400px;"></div>
+
+    <!-- Include your JavaScript code -->
+    <script>
+        var map, marker, lat, lng;
+
+        function initMap() {
+            navigator.geolocation.watchPosition((position) => {
+                console.log(position.coords);
+                lat = position.coords.latitude;
+                lng = position.coords.longitude;
+                
+                console.log(lat);
+                console.log(lng);
+                // Initialize the map using Leaflet and OpenStreetMap
+                map = L.map('map').setView([lat, lng], 18);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+
+                // Add a marker to the map
+                marker = L.marker([lat, lng]).addTo(map);
+            });
+        }
+        initMap();
+    </script>
+</body>
+</html>
