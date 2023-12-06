@@ -7,7 +7,7 @@ this file can manually update to the Github Project : **NearParkingLot**
 
 [Github](https://github.com/shiangyuhou/DBMS_NearParkingLot)
 
-[Discussion](/G5g7MhZGR_yRbnE0lKDUYQ)
+[Discussion](https://hackmd.io/f7ROse65QOiKWZDtE8hClA)
 
 
 ### Grab Data

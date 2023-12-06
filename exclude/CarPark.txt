@@ -1,0 +1,6 @@
+CarParkRegNo
+EmergencyPhone
+EmergencyPhone
+WebURL
+VehicleRestriction
+SupervisionType
