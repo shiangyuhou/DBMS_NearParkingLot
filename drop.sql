@@ -8,6 +8,6 @@ drop table ParkingFacility;
 drop table ParkingRate;
 drop table ParkingServiceTime;
 drop table ParkingSpace;
--- drop table ParkingSpot;
--- drop table ParkingSpotAvailability;
+drop table ParkingSpot;
+drop table ParkingSpotAvailability;
 drop table ParkingTicketing;

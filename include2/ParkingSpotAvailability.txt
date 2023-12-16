@@ -1,0 +1,10 @@
+CarParkID
+CarParkName_Zh_tw
+SpotAvailabilities_ParkingSpotID
+SpotAvailabilities_SpaceType
+SpotAvailabilities_ServiceStatus
+SpotAvailabilities_SpotStatus
+SpotAvailabilities_DeviceStatus
+SpotAvailabilities_Floor
+SpotAvailabilities_ChargeStatus
+SpotAvailabilities_DataCollectTime

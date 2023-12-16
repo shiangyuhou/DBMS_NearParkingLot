@@ -1,0 +1,6 @@
+CarParkID
+CarParkName_Zh_tw
+ParkingSpotID
+SpaceType
+HasChargingPoint
+Floor

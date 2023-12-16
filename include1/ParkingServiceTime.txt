@@ -1,0 +1,15 @@
+CarParkID
+CarParkName_Zh_tw
+ServiceDay_ServiceTag
+ServiceDay_Monday
+ServiceDay_Tuesday
+ServiceDay_Wednesday
+ServiceDay_Thursday
+ServiceDay_Friday
+ServiceDay_Saturday
+ServiceDay_Sunday
+ServiceDay_NationalHolidays
+Description
+StartTime
+EndTime
+FreeOfCharge

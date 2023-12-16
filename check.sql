@@ -18,29 +18,30 @@ SELECT CarParkID, CarParkName_Zh_tw
 from ParkingEntranceExit
 limit 10;
 
--- SELECT CarParkID, CarParkName_Zh_tw
--- -- SELECT *
--- from ParkingFacility
--- limit 10;
+SELECT CarParkID, CarParkName_Zh_tw
+-- SELECT *
+from ParkingFacility
+limit 10;
 
 SELECT CarParkID, CarParkName_Zh_tw
 from ParkingRate
 limit 10;
 
--- -- SELECT CarParkID, CarParkName_Zh_tw
--- SELECT *
--- from ParkingServiceTime
--- limit 10;
+-- SELECT CarParkID, CarParkName_Zh_tw
+SELECT *
+from ParkingServiceTime
+limit 10;
 
--- -- SELECT CarParkID, CarParkName_Zh_tw
--- SELECT *
--- from ParkingSpace
--- limit 10;
+-- SELECT CarParkID, CarParkName_Zh_tw
+SELECT *
+from ParkingSpace
+limit 10;
 
--- -- SELECT CarParkID, CarParkName_Zh_tw
--- SELECT *
--- from ParkingSpot
--- limit 10;
+-- SELECT CarParkID, CarParkName_Zh_tw
+SELECT *
+from ParkingSpot
+limit 10;
+-- SELECT * from ParkingSpot limit 10;
 /*
 {
     "CarParkID": "KEE12111",
@@ -85,9 +86,9 @@ limit 10;
 
 
 -- SELECT CarParkID, CarParkName_Zh_tw
--- SELECT *
--- from ParkingSpotAvailability
--- limit 10;
+SELECT *
+from ParkingSpotAvailability
+limit 10;
 /*
 {
     "CarParkID": "KEE12111",

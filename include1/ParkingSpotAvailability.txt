@@ -1,0 +1,10 @@
+CarParkID
+CarParkName_Zh_tw
+ParkingSpotID
+SpaceType
+ServiceStatus
+SpotStatus
+DeviceStatus
+Floor
+ChargeStatus
+DataCollectTime

@@ -1,4 +1,4 @@
-CarParkID,CarParkName_Zh_tw,ParkingSpotID,SpaceType,ServiceStatus,SpotStatus,DeviceStatus,Floor,ChargeStatus,DataCollectTime
+CarParkID,CarParkName_Zh_tw,SpotAvailabilities_ParkingSpotID,SpotAvailabilities_SpaceType,SpotAvailabilities_ServiceStatus,SpotAvailabilities_SpotStatus,SpotAvailabilities_DeviceStatus,SpotAvailabilities_Floor,SpotAvailabilities_ChargeStatus,SpotAvailabilities_DataCollectTime
 KEE11101,信二停車場,001,0,1,1,1,1,1,2023-11-19T20:40:07+08:00
 KEE11102,正濱國小收費立體停車場,TPE-001,1,1,1,1,1,1,2021-08-23T13:42:40+08:00
 KEE11104,中正區行政大樓地下停車場,TPE-001,1,1,2,1,B1,1,2021-08-23T13:39:42+08:00

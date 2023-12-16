@@ -12,11 +12,13 @@ CREATE TABLE IF NOT EXISTS CarParks (
     OperatorID VARCHAR(20),
     `Description` VARCHAR(255),
     -- `Geometry` VARCHAR(255),
-    CarParkType tinyint ,
-    ParkingGuideType tinyint ,
-    ParkingTypes tinyint ,
-    ParkingSiteTypes tinyint ,
-    ChargeTypes tinyint ,
+    CarParkType int ,
+    ParkingGuideType int ,
+
+    -- ParkingTypes tinyint ,
+    -- ParkingSiteTypes tinyint ,
+    -- ChargeTypes tinyint ,
+
     -- Telephone VARCHAR(20),
     PositionLat DECIMAL(10, 6),
     PositionLon DECIMAL(10, 6),
@@ -43,7 +45,7 @@ CREATE TABLE IF NOT EXISTS CarParks (
     Lighting tinyint ,
     SecureParking tinyint ,
     TicketOffice tinyint ,
-    ProhibitedForAnyHazardousMaterialLoads tinyint ,
+    ProhibitedForAnyHazardousMaterialLoads VARCHAR(20) ,
     SecurityGuard tinyint ,
     Supervision tinyint ,
     City VARCHAR(255),
@@ -66,11 +68,14 @@ CREATE TABLE IF NOT EXISTS ParkingAvailability (
     CarParkName_Zh_tw VARCHAR(40),
     TotalSpaces int,
     AvailableSpaces int,
-    Availabilities VARCHAR(100),
+    Availabilities_SpaceType int,
+    Availabilities_NumberOfSpaces int,
+    Availabilities_AvailableSpaces int,
+    -- Availabilities VARCHAR(100),
     ServiceStatus tinyint,
     FullStatus tinyint,
     ChargeStatus tinyint,
-    DataCollectTime VARCHAR(50)
+    DataCollectTime VARCHAR(60) 
 );
 
 CREATE TABLE IF NOT EXISTS ParkingEntranceExit (
@@ -78,9 +83,19 @@ CREATE TABLE IF NOT EXISTS ParkingEntranceExit (
     CarParkID VARCHAR(20),
     CarParkName_Zh_tw VARCHAR(40),
     EntranceExitType tinyint,
-    Entrances VARCHAR(10),
-    Exits VARCHAR(10),
-    EntranceExits VARCHAR(255)
+    EntranceExitName_Zh_tw VARCHAR(30),
+    PositionLat FLOAT,
+    PositionLon FLOAT,
+    `Type` VARCHAR(10),
+    MaxAllowedHeight VARCHAR(30),
+    RoadID VARCHAR(10),
+    LinkID VARCHAR(10),
+    RoadName VARCHAR(30),
+    Bearing VARCHAR(10)
+    
+    -- Entrances VARCHAR(10),
+    -- Exits VARCHAR(10),
+    -- EntranceExits VARCHAR(255)
 
 );
 
@@ -88,7 +103,10 @@ CREATE TABLE IF NOT EXISTS ParkingFacility (
     primary key (CarParkID, CarParkName_Zh_tw),
     CarParkID VARCHAR(20),
     CarParkName_Zh_tw VARCHAR(40),
-    Facilities TEXT
+    -- Facilities TEXT
+    FacilityName VARCHAR(30),
+    FacilityType VARCHAR(20),
+    LocationDescription VARCHAR(200)
 
 );
 
@@ -97,7 +115,38 @@ CREATE TABLE IF NOT EXISTS ParkingRate (
     CarParkID VARCHAR(20),
     CarParkName_Zh_tw VARCHAR(40),
     `Description` VARCHAR(255),
-    HourlyRates VARCHAR(255)
+    HourlyRates VARCHAR(255),
+    RateDescription VARCHAR(255),
+    RestrictionUserType VARCHAR(5),
+    SpaceType VARCHAR(5),
+    RateQualifier VARCHAR(5),
+    RatePrice VARCHAR(5),
+    MaxPrice VARCHAR(6),
+    MinHalfHourCharge VARCHAR(5),
+    StartTime VARCHAR(10),
+    EndTime VARCHAR(10),
+    ServiceDay_Monday VARCHAR(3),
+    ServiceDay_Tuesday VARCHAR(3),
+    ServiceDay_Wednesday VARCHAR(3),
+    ServiceDay_Thursday VARCHAR(3),
+    ServiceDay_Friday VARCHAR(3),
+    ServiceDay_Saturday VARCHAR(3),
+    ServiceDay_Sunday VARCHAR(3),
+    ServiceDay_NationalHolidays VARCHAR(3)
+    
+    -- RestrictionUserType tinyint DEFAULT 0,
+    -- SpaceType tinyint DEFAULT 0,
+    -- RateQualifier tinyint DEFAULT 0,
+    -- MinHalfHourCharge tinyint DEFAULT -1,
+
+    -- ServiceDay_Monday boolean DEFAULT 0,
+    -- ServiceDay_Tuesday boolean DEFAULT 0,
+    -- ServiceDay_Wednesday boolean DEFAULT 0,
+    -- ServiceDay_Thursday boolean DEFAULT 0,
+    -- ServiceDay_Friday boolean DEFAULT 0,
+    -- ServiceDay_Saturday boolean DEFAULT 0,
+    -- ServiceDay_Sunday boolean DEFAULT 0,
+    -- ServiceDay_NationalHolidays boolean DEFAULT 0
 
 );
 
@@ -105,7 +154,20 @@ CREATE TABLE IF NOT EXISTS ParkingServiceTime (
     primary key (CarParkID, CarParkName_Zh_tw),
     CarParkID VARCHAR(20),
     CarParkName_Zh_tw VARCHAR(40),
-    OpeningHours VARCHAR(10000)
+    ServiceDay_ServiceTag VARCHAR(20),
+    ServiceDay_Monday boolean,
+    ServiceDay_Tuesday boolean,
+    ServiceDay_Wednesday boolean,
+    ServiceDay_Thursday boolean,
+    ServiceDay_Friday boolean,
+    ServiceDay_Saturday boolean,
+    ServiceDay_Sunday boolean,
+    ServiceDay_NationalHolidays boolean,
+    `Description` VARCHAR(40),
+    StartTime time,
+    EndTime time,
+    FreeOfCharge boolean
+    -- OpeningHours VARCHAR(10000)
 
 );
 
@@ -115,7 +177,11 @@ CREATE TABLE IF NOT EXISTS ParkingSpace (
     CarParkID VARCHAR(20),
     CarParkName_Zh_tw VARCHAR(40),
     TotalSpaces int,
-    Spaces VARCHAR(16300)
+    SpaceType int,
+    IsMechanical boolean,
+    HasChargingPoint boolean,
+    NumberOfSpaces int,
+    StayType int
 
 );
 
@@ -123,14 +189,24 @@ CREATE TABLE IF NOT EXISTS ParkingSpace (
 CREATE TABLE IF NOT EXISTS ParkingSpot (
     CarParkID VARCHAR(20),
     CarParkName_Zh_tw VARCHAR(40),
-    spots VARCHAR(3000)
+    ParkingSpotID VARCHAR(20),
+    SpaceType tinyint,
+    HasChargingPoint boolean,
+    Floor VARCHAR(3)
 );
 
 
 CREATE TABLE IF NOT EXISTS ParkingSpotAvailability (
     CarParkID VARCHAR(20),
     CarParkName_Zh_tw VARCHAR(40),
-    SpotAvailabilities VARCHAR(16300)
+    ParkingSpotID VARCHAR(20),
+    SpaceType int,
+    ServiceStatus tinyint,
+    SpotStatus int,
+    DeviceStatus tinyint,
+    Floor VARCHAR(3),
+    ChargeStatus tinyint,
+    DataCollectTime DATETIME 
 
 );
 
@@ -169,10 +245,10 @@ CREATE TABLE IF NOT EXISTS ParkingTicketing (
     SmartCard_IPASS tinyint,
     SmartCard_ICash tinyint,
     SmartCard_HappyCash tinyint,
-    PaymentDescription VARCHAR(60),
+    PaymentDescription VARCHAR(200),
     HasTicketingMachine tinyint,
     TicketingMachine_DisabledFriendly tinyint,
-    TicketingMachine_Positions tinyint,
+    -- TicketingMachine_Positions tinyint,
     HasTicketingValidator tinyint,
     TicketingValidatorType_Contactless tinyint,
     TicketingValidatorType_Magnetic tinyint,
@@ -190,6 +266,9 @@ enclosed by '"'
 lines terminated by '\n'
 ignore 1 lines;
 
+
+-- bad data removed
+-- ,,NULL,test@123.com,花蓮市商校街234號旁,
 load data local infile './data_csv/Operator_output.csv'
 into table Operator
 fields terminated by ','
@@ -211,12 +290,20 @@ enclosed by '"'
 lines terminated by '\n'
 ignore 1 lines;
 
--- load data local infile './data_csv/ParkingFacility_output.csv'
--- into table ParkingFacility
--- fields terminated by ','
--- enclosed by '"'
--- lines terminated by '\n'
--- ignore 1 lines;
+
+-- the enclosed have some problem
+-- removed from data file
+-- 001,府前廣場地下停車場,廁所,2,"主停地下1樓樓梯旁與副停地下1樓,地下2樓樓梯旁"
+-- tsa004,草屯鎮公有零售市場地下停車場(市一停車場),電梯,1,"3部(和興街,碧山南路,太平路)"
+-- KEE11307,信義國小地下停車場,繳費機,18,"出入口柵欄機旁,ABC梯廳旁皆有"
+-- 087,民有市場地下停車場,電動車充電站,19,"B2-34,35車格"
+
+load data local infile './data_csv/ParkingFacility_output.csv'
+into table ParkingFacility
+fields terminated by ','
+enclosed by '"'
+lines terminated by '\n'
+ignore 1 lines;
 
 load data local infile './data_csv/ParkingRate_output.csv'
 into table ParkingRate
@@ -225,33 +312,37 @@ enclosed by '"'
 lines terminated by '\n'
 ignore 1 lines;
 
--- load data local infile './data_csv/ParkingServiceTime_output.csv'
--- into table ParkingServiceTime
--- fields terminated by ','
--- enclosed by '"'
--- lines terminated by '\n'
--- ignore 1 lines;
+load data local infile './data_csv/ParkingServiceTime_output.csv'
+into table ParkingServiceTime
+fields terminated by ','
+enclosed by '"'
+lines terminated by '\n'
+ignore 1 lines;
 
--- load data local infile './data_csv/ParkingSpace_output.csv'
--- into table ParkingSpace
--- fields terminated by ','
--- enclosed by '"'
--- lines terminated by '\n'
--- ignore 1 lines;
 
--- load data local infile './data_csv/ParkingSpot_output.csv'
--- into table ParkingSpot
--- fields terminated by ','
--- enclosed by '"'
--- lines terminated by '\n'
--- ignore 1 lines;
 
--- load data local infile './data_csv/ParkingSpotAvailability_output.csv'
--- into table ParkingSpotAvailability
--- fields terminated by ','
--- enclosed by '"'
--- lines terminated by '\n'
--- ignore 1 lines;
+
+-- duplicate name!!
+load data local infile './data_csv/ParkingSpace_output.csv'
+into table ParkingSpace
+fields terminated by ','
+enclosed by '"'
+lines terminated by '\n'
+ignore 1 lines;
+
+load data local infile './data_csv/ParkingSpot_output.csv'
+into table ParkingSpot
+fields terminated by ','
+enclosed by '"'
+lines terminated by '\n'
+ignore 1 lines;
+
+load data local infile './data_csv/ParkingSpotAvailability_output.csv'
+into table ParkingSpotAvailability
+fields terminated by ','
+enclosed by '"'
+lines terminated by '\n'
+ignore 1 lines;
 
 
 load data local infile './data_csv/ParkingTicketing_output.csv'

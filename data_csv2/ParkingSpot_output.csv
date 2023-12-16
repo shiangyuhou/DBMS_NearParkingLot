@@ -1,4 +1,4 @@
-CarParkID,CarParkName_Zh_tw,ParkingSpotID,SpaceType,HasChargingPoint,Floor
+CarParkID,CarParkName_Zh_tw,Spots_ParkingSpotID,Spots_SpaceType,Spots_HasChargingPoint,Spots_Floor
 KEE11703,基隆七堵停車場,109002-125,1,0,1
 KEE11302,基隆成功站,KEE-08-034,1,0,8
 KEE12109,濱海遊憩區停車場,KEE-008,1,0,1

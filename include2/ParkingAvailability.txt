@@ -1,0 +1,11 @@
+CarParkID
+CarParkName_Zh_tw
+TotalSpaces
+AvailableSpaces
+Availabilities_SpaceType
+Availabilities_NumberOfSpaces
+Availabilities_AvailableSpaces
+ServiceStatus
+FullStatus
+ChargeStatus
+DataCollectTime

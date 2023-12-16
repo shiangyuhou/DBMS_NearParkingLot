@@ -5,13 +5,6 @@ import json
 import csv
 import os
 
-main_folder = 'db_ssh'
-exclude_folder = 'exclude'
-output_file = 'output_carpark.csv'
-output_folder = 'data_csv1'
-
-json_file_path = 'ParkingTicketing.json'
-csv_file_path = 'ParkingTicketing.csv'
 
 # def load_json_and_store_csv(json_file_path, csv_file_path):
 #     # Load JSON data from file
@@ -31,7 +24,6 @@ csv_file_path = 'ParkingTicketing.csv'
 #         for record in data:
 #             csv_writer.writerow({key: record.get(key, None) for key in header})
 
-
 def flatten_json(data, parent_key='', sep='_'):
     """Flatten nested JSON structure."""
     flattened = {}
@@ -39,10 +31,66 @@ def flatten_json(data, parent_key='', sep='_'):
         new_key = f"{parent_key}{sep}{key}" if parent_key else key
         if isinstance(value, dict):
             flattened.update(flatten_json(value, new_key, sep=sep))
+        elif isinstance(value, list):
+            # flattened.update(flatten_json(value, new_key, sep=sep))
+            for zero, one in enumerate(value):
+                if isinstance(one, dict):
+                    # rtn = flatten_json(one)
+                    # print(rtn)
+                    flattened.update(flatten_json(one, new_key, sep=sep))
+                    # mlist.append(flatten_json(one))
+                    pass
+                    # flattened.update(flatten_json(one, new_key, sep=sep))
+
+                # flattened[subkey] = subvalue
         else:
             flattened[new_key] = value
+        pass
     return flattened
+# def flatten_json(data, parent_key='', sep='_'):
+#     """Flatten nested JSON structure."""
+#     flattened = {}
+#     if isinstance(data, list):
+#         for index, item in enumerate(data):
+#             flattened_item = flatten_json(item, parent_key=f"{parent_key}{sep}{index}", sep=sep)
+#             flattened.extend(flattened_item)
 
+#     elif isinstance(data, dict):
+#         for key, value in data.items():
+#             new_key = f"{parent_key}{sep}{key}" if parent_key else key
+#             if isinstance(value, dict):
+#                 flattened.update(flatten_json(value, new_key, sep=sep))
+#             elif isinstance(value, list):
+#                 for index, sub_item in enumerate(value):
+#                     flattened_sub_item = flatten_json(sub_item, parent_key=new_key, sep=sep)
+#                     flattened.extend(flattened_sub_item)
+#             else:
+#                 flattened[new_key] = value
+
+#     return flattened
+
+
+# def flatten_json_(data, parent_key='', sep='_'):
+#     flattened_data = []
+    
+#     if isinstance(data, list):
+#         for index, item in enumerate(data):
+#             flattened_item = flatten_json(item, parent_key=f"{parent_key}{sep}{index}", sep=sep)
+#             flattened_data.extend(flattened_item)
+#     elif isinstance(data, dict):
+#         for key, value in data.items():
+#             new_key = f"{parent_key}{sep}{key}" if parent_key else key
+#             if isinstance(value, list):
+#                 for index, sub_item in enumerate(value):
+#                     flattened_sub_item = flatten_json(sub_item, parent_key=new_key, sep=sep)
+#                     flattened_data.extend(flattened_sub_item)
+#             elif isinstance(value, dict):
+#                 flattened_sub_item = flatten_json(value, parent_key=new_key, sep=sep)
+#                 flattened_data.extend(flattened_sub_item)
+#             else:
+#                 flattened_data.append({new_key: value})
+    
+#     return flattened_data
 
 
 def load_exclude_file(exclude_file_path):
@@ -175,6 +223,7 @@ def process_folder(main_folder, input_name, output_file, exclude_file_path=None)
                     print(subfolder + "  \t/" + input_name + "\t is empty type (none)")
                     continue
                 flattened_data = [flatten_json(record) for record in data] # if data else {}
+                # flattened_data = [flatten_data(record) for record in data] # if data else {}
                 # Load exclusions from the exclude file
                 # exclude_name = os.path.join(exclude_file_path, )
                 exclude_data = load_exclude_file(exclude_file_path) if exclude_file_path else []
@@ -201,10 +250,18 @@ def process_folder(main_folder, input_name, output_file, exclude_file_path=None)
             csv_writer.writerow({key: record.get(key, None) for key in updated_header})
 
 
+input_folder = 'db_ssh'
+exclude_folder = 'exclude'
+output_file = 'output_carpark.csv'
+output_folder = 'data_csv1'
+
+# json_file_path = 'ParkingTicketing.json'
+# csv_file_path = 'ParkingTicketing.csv'
+
 
 if not os.path.exists(output_folder):
     os.mkdir(output_folder)
-for main_name in os.listdir(os.path.join(main_folder, "Taoyuan")):
+for main_name in os.listdir(os.path.join(input_folder, "Taoyuan")):
     # input_name = 'CarPark.json'
     name , extension = os.path.splitext(main_name)
     new_filename = name + "_output.csv"
@@ -212,7 +269,7 @@ for main_name in os.listdir(os.path.join(main_folder, "Taoyuan")):
     exclude_path = os.path.join(exclude_folder, exclude_name)
     output_path = os.path.join(output_folder, new_filename)
     if main_name.endswith('.json'):
-        process_folder(main_folder, main_name, output_path, exclude_path)
+        process_folder(input_folder, main_name, output_path, exclude_path)
 
 
 # load_json_and_store_csv(json_file_path, csv_file_path, exclude_file_path)

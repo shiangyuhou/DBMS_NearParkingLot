@@ -1,0 +1,12 @@
+CarParkID
+CarParkName_Zh_tw
+EntranceExitType
+EntranceExits_EntranceExitName_Zh_tw
+EntranceExits_Position_PositionLat
+EntranceExits_Position_PositionLon
+EntranceExits_Type
+EntranceExits_MaxAllowedHeight
+EntranceExits_RoadID
+EntranceExits_RoadName
+EntranceExits_LinkID
+EntranceExits_Bearing

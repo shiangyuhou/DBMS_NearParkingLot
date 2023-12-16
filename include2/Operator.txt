@@ -1,0 +1,6 @@
+OperatorID
+OperatorName_Zh_tw
+Telephone
+Email
+Address
+BAN
