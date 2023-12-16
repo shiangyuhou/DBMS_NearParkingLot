@@ -1,6 +1,0 @@
-CarParkID
-CarParkName_Zh_tw
-EntranceExitType
-Entrances
-Exits
-EntranceExits

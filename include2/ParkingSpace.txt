@@ -1,8 +1,0 @@
-CarParkID
-CarParkName_Zh_tw
-TotalSpaces
-Spaces_SpaceType
-Spaces_IsMechanical
-Spaces_HasChargingPoint
-Spaces_NumberOfSpaces
-Spaces_StayType

@@ -12,7 +12,7 @@ def split_line_and_write_to_file(line, output_file):
             file.write(value.strip() + '\n')
 
 # Example usage:
-input_folder = "data_csv2"
+input_folder = "data_csv"
 input_file = ""
 outpit_folder = "include2"
 output_file = "output.txt"

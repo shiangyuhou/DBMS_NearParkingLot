@@ -1,4 +1,4 @@
-CarParkID,CarParkName_Zh_tw,TotalSpaces,SpaceType,IsMechanical,HasChargingPoint,NumberOfSpaces,StayType
+CarParkID,CarParkName_Zh_tw,TotalSpaces,Spaces_SpaceType,Spaces_IsMechanical,Spaces_HasChargingPoint,Spaces_NumberOfSpaces,Spaces_StayType
 10909,市府大樓地下停車場,261,1,0,0,261,4
 10814,大同國小(西榮街)停車場,18,1,0,0,18,4
 10904Aeast,新生路停車場民族站,139,1,0,0,139,4

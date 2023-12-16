@@ -1,4 +1,4 @@
-CarParkID,CarParkName_Zh_tw,ServiceDay_ServiceTag,ServiceDay_Monday,ServiceDay_Tuesday,ServiceDay_Wednesday,ServiceDay_Thursday,ServiceDay_Friday,ServiceDay_Saturday,ServiceDay_Sunday,ServiceDay_NationalHolidays,Description,StartTime,EndTime,FreeOfCharge
+CarParkID,CarParkName_Zh_tw,OpeningHours_ServiceDay_ServiceTag,OpeningHours_ServiceDay_Monday,OpeningHours_ServiceDay_Tuesday,OpeningHours_ServiceDay_Wednesday,OpeningHours_ServiceDay_Thursday,OpeningHours_ServiceDay_Friday,OpeningHours_ServiceDay_Saturday,OpeningHours_ServiceDay_Sunday,OpeningHours_ServiceDay_NationalHolidays,OpeningHours_Description,OpeningHours_StartTime,OpeningHours_EndTime,OpeningHours_FreeOfCharge
 10912east,嘉義東市停車場,全年適用,1,1,1,1,1,1,1,1,全日,00:00,23:59,0
 10909,市府大樓地下停車場,全年適用,1,1,1,1,1,1,1,1,全日,00:00,23:59,0
 10816,停14(蘭停八)停車場,全年適用,1,1,1,1,1,1,1,1,全日,00:00,23:59,0

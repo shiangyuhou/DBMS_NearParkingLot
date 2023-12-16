@@ -1,9 +1,0 @@
-CarParkID
-CarParkName_Zh_tw
-TotalSpaces
-AvailableSpaces
-Availabilities
-ServiceStatus
-FullStatus
-ChargeStatus
-DataCollectTime
