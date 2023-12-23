@@ -42,5 +42,5 @@ this file can manually update to the Github Project : **NearParkingLot**
 │   ├── smartfinding.sql    查詢智慧尋車機
 │   ├── toilet.sql          查詢廁所
 │   ├── query.py            將上面的sql包成.py進行查詢
-│   └── findlocation.py     輸入citycode，查詢所在城市
+│   └── findlocation.py     1. 輸入citycode，查詢所在城市 2. 輸入經緯度，找最近停車場
 ```
