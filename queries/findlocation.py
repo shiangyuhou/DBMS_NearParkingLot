@@ -20,4 +20,15 @@ def findcity(citycode):
     except Exception as ex:
         print(ex)
 
-findcity("TPE")  #query自行修改
+def latnlon(lat, lon):  #lat and lon must be string
+    try:
+        conn = pymysql.connect(**db_settings)
+        with conn.cursor() as cursor:
+            command = "SELECT c.CarParkName_Zh_tw FROM parkingentranceexit AS p JOIN carparks AS c ON c.CarParkID=p.CarParkID ORDER BY (ABS(p.PositionLat - " + lat + ") + ABS(p.PositionLon - " + lon + ")) LIMIT 1;"
+            cursor.execute(command)
+            result = cursor.fetchall()
+            print(result)
+    except Exception as ex:
+        print(ex)
+
+latnlon("25.067829", "121.662017")  #query自行修改
