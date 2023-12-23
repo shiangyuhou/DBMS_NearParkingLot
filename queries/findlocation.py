@@ -20,7 +20,7 @@ def findcity(citycode):
     except Exception as ex:
         print(ex)
 
-def latnlon(lat, lon):  #lat and lon must be string
+def latnlon(lat, lon):
     lat=str(lat)
     lon=str(lon)
     try:
@@ -33,4 +33,4 @@ def latnlon(lat, lon):  #lat and lon must be string
     except Exception as ex:
         print(ex)
 
-latnlon("25.067829", "121.662017")  #query自行修改
+latnlon(25.067829, 121.662017)  #query自行修改
