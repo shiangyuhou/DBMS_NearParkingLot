@@ -9,7 +9,7 @@ db_settings = {
     "charset": "utf8"
 }
 
-querystring="Parkinglot/queries/toilet.sql" #query自行修改
+querystring="queries/toilet.sql" #query自行修改
 
 try:
     conn = pymysql.connect(**db_settings)
