@@ -9,15 +9,15 @@ db_settings = {
     "charset": "utf8"
 }
 
-citycode = "TPE" #query自行修改
+def findcity(citycode):
+    try:
+        conn = pymysql.connect(**db_settings)
+        with conn.cursor() as cursor:
+            command = "select c.CarParkName_Zh_tw from Carparks as c where Citycode = '" + citycode + "'"
+            cursor.execute(command)
+            result = cursor.fetchall()
+            print(result)
+    except Exception as ex:
+        print(ex)
 
-try:
-    conn = pymysql.connect(**db_settings)
-    with conn.cursor() as cursor:
-        command = "select c.CarParkName_Zh_tw from Carparks as c where Citycode = '" + citycode + "'"
-        cursor.execute(command)
-        result = cursor.fetchall()
-        print(result)
-
-except Exception as ex:
-    print(ex)
+findcity("TPE")  #query自行修改
