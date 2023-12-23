@@ -9,15 +9,16 @@ db_settings = {
     "charset": "utf8"
 }
 
-querystring="queries/toilet.sql" #query自行修改
+def search(querystring):
+    try:
+        conn = pymysql.connect(**db_settings)
+        with conn.cursor() as cursor:
+            command = open(querystring, "r").read()
+            cursor.execute(command)
+            result = cursor.fetchall()
+            print(result)
 
-try:
-    conn = pymysql.connect(**db_settings)
-    with conn.cursor() as cursor:
-        command = open(querystring, "r").read()
-        cursor.execute(command)
-        result = cursor.fetchall()
-        print(result)
+    except Exception as ex:
+        print(ex)
 
-except Exception as ex:
-    print(ex)
+search("queries/toilet.sql")  #query自行修改
