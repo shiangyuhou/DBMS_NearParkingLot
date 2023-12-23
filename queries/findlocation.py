@@ -21,6 +21,8 @@ def findcity(citycode):
         print(ex)
 
 def latnlon(lat, lon):  #lat and lon must be string
+    lat=str(lat)
+    lon=str(lon)
     try:
         conn = pymysql.connect(**db_settings)
         with conn.cursor() as cursor:
