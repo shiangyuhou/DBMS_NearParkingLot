@@ -32,5 +32,15 @@ this file can manually update to the Github Project : **NearParkingLot**
 │   ├── json2csv.py         把($input_folder)裡的json檔轉換成csv
 │   │                       檔並存在($output_folder)中.     
 │   ├── replace.sh          把"data_csv"放到parent folder (DBMS_Nearingxxx) 裡  
-│   └── split.py            把csv的header抓下來  
+│   └── split.py            把csv的header抓下來
+├── queries
+│   ├── AED.sql             查詢AED
+│   ├── detectionsystem.sql 查詢車位在席偵測系統
+│   ├── elevator.sql        查詢電梯(會出bug，因為有中文)
+│   ├── lactationroom.sql   查詢哺乳室
+│   ├── machine.sql         查詢繳費機
+│   ├── smartfinding.sql    查詢智慧尋車機
+│   ├── toilet.sql          查詢廁所
+│   ├── query.py            將上面的sql包成.py進行查詢
+│   └── findlocation.py     1. 輸入citycode，查詢所在城市 2. 輸入經緯度，找最近停車場
 ```
