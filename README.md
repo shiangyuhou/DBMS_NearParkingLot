@@ -10,6 +10,18 @@ this file can manually update to the Github Project : **NearParkingLot**
 [Discussion](https://hackmd.io/f7ROse65QOiKWZDtE8hClA)
 
 
+## 開始 index.php
+
+git clone git@github.com:shiangyuhou/DBMS_NearParkingLot.git
+
+cd DBMS_NearParkingLot 
+php -S localhost:8000
+
+
+進入瀏覽器輸入
+http://127.0.0.1:8000/php/
+
+
 
 ## About create table 
 ```
