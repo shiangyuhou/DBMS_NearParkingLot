@@ -1,0 +1,40 @@
+.card {
+display: flex;
+margin: 24px 0;
+min-width: 70px;
+}
+
+.card__avatar {
+/* 設置最小寬度，圓形就不會被右方壓縮到變形 */
+min-width: 50px;
+height: 50px;
+/* border-radius: 50%; */
+background: #e4f0fb;
+}
+
+.card__body {
+margin-left: 10px;
+}
+
+.card__info {
+font-size: 16px;
+}
+
+.card__author {
+color: #5c9edc;
+font-weight: 700;
+}
+
+.card__time {
+color: #a0a0a0;
+}
+
+.card__content {
+margin-top: 8px;
+max-width: 100%;
+letter-spacing: 1px;
+/* word-break：文字斷行 // break-all：遇到邊界就換行 */
+word-break: break-all;
+/* white-space：如何處理元素內的空白 // pre-line：自動合併多個空白，但保留換行符號 */
+white-space: pre-line;
+}

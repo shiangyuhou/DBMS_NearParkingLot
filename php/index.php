@@ -1,80 +1,89 @@
-<!-- index.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nearing Parking Lot</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
 
-        header {
-            background-color: #4CAF50;
-            padding: 10px;
-            text-align: center;
-            color: white;
-        }
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/content.css">
+    <link rel="stylesheet" href="css/card.css">
+    <link rel="stylesheet" href="css/nevigator.css">
 
-        h1 {
-            margin: 0;
-        }
+    <!-- Open Street Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-        .admin-button {
-            float: right;
-            margin-top: -40px;
-            margin-right: 20px;
-            padding: 10px;
-            background-color: #008CBA;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-
-        form {
-            margin-top: 20px;
-        }
-    </style>
+    <title>Login Form</title>
 </head>
+
+
 <body>
+<main>
+<div class="board__header">
+    <div class="border__word-block">
+        <h1 class="board__tittle">DBMS_NearParkingLot</h1>
+    </div>
+    <div class="board__btn-block">
+            <a class="board__btn" href="register.php">Sign up</a>
+        <a class="board__btn" href="login.php">Log in</a>
+        
+    </div>
 
-<header>
-    <h1>Nearing Parking Lot</h1>
-    <a href="#" class="admin-button">Sign In (Admin)</a>
-</header>
+</div>
 
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Form was submitted, process the data and show results
+<div class="board__content"> 
 
-    // Retrieve form data
-    $searchTerm = $_POST["searchTerm"];
+<!-- <div class="board__map"></div> -->
+<div class="board__nevigator">
+    <div class="board__btn-block">
+        <a class="board__btn" href="register.php">找即時</a>
+        <a class="board__btn" href="login.php">找充電</a>
+        <a class="board__btn" href="login.php">找月租</a>
+        <a class="board__btn" href="login.php">找其他</a>
+    </div>
 
-    // Generate search results based on the search term
-    $searchResults = generateSearchResults($searchTerm);
+</div>
+<div id="map" style="height: 400px;"></div>
 
-    // Display the results
-    echo "<h2>Search Results for '$searchTerm'</h2>";
-    echo $searchResults;
-} else {
-    // Show the search form
-    echo "<h2>Search Form</h2>";
-    echo "<form action='index.php' method='post'>";
-    echo "  <label for='searchTerm'>Enter search term:</label>";
-    echo "  <input type='text' id='searchTerm' name='searchTerm' required>";
-    echo "  <br>";
-    echo "  <input type='submit' value='Search'>";
-    echo "</form>";
-}
+    <!-- init Map -->
+    <script>
+        var map, marker, lat, lng;
 
-// Function to generate search results based on the search term
-function generateSearchResults($searchTerm) {
-    // You can customize this function to generate dynamic search results
-    // For now, let's just return a simple message
-    return "<p>Search results for '$searchTerm' are displayed here.</p>";
-}
-?>
+        function initMap() {
+            navigator.geolocation.watchPosition((position) => {
+                console.log(position.coords);
+                lat = position.coords.latitude;
+                lng = position.coords.longitude;
+                
+                console.log(lat);
+                console.log(lng);
+                // Initialize the map using Leaflet and OpenStreetMap
+                map = L.map('map').setView([lat, lng], 18);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+
+                // Add a marker to the map
+                marker = L.marker([lat, lng]).addTo(map);
+            });
+        }
+        initMap();
+    </script>
+
+<div class="board__hr"></div>
+
+<?php require_once("content.php"); ?>
+
+<div class="board__hr"></div>
+
+<!-- map + list -->
+</div>
+
+
+
+</main>
 </body>
 </html>
