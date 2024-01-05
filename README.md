@@ -15,6 +15,7 @@ this file can manually update to the Github Project : **NearParkingLot**
 git clone git@github.com:shiangyuhou/DBMS_NearParkingLot.git
 
 cd DBMS_NearParkingLot 
+
 php -S localhost:8000
 
 
