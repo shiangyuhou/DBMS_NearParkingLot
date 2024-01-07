@@ -14,6 +14,14 @@ this file can manually update to the Github Project : **NearParkingLot**
 
 (讓mysql處於可以被連線的狀態)
 
+## Create_table
+
+在DBMS_NearParkingLot這個資料夾下，以root 進入 mysql，執行
+```
+source create_table.sql;
+```
+可以用check.sql測試是否建立完成
+有遇到問題回去看作業0
 
 ### 增設使用者帳號/密碼
 
