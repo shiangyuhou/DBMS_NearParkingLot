@@ -1,7 +1,7 @@
 <?php
     $iter = 1;
-  // 把 $result 資料的 Key 值設定為欄位名稱的陣列
-//   while($row = $result->fetch_assoc()) {
+    // 把 $result 資料的 Key 值設定為欄位名稱的陣列
+    //   while($row = $result->fetch_assoc()) {
     while($iter <= 10) {
 ?>
 

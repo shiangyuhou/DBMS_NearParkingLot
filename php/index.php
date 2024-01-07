@@ -27,7 +27,7 @@
         <h1 class="board__tittle">DBMS_NearParkingLot</h1>
     </div>
     <div class="board__btn-block">
-            <a class="board__btn" href="register.php">Sign up</a>
+        <a class="board__btn" href="register.php">Sign up</a>
         <a class="board__btn" href="login.php">Log in</a>
         
     </div>
