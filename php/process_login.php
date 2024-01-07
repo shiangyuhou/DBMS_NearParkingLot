@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo 'Login successful!<br>';
             echo '//redirect to admin page with some proof';
         } else {
-            echo 'Invalid account or password';
+            echo 'Invalid account or password<br>';
             echo '// may be redirect to the login page again';
 
         }

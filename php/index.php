@@ -52,6 +52,16 @@
     <script>
         var map, marker, lat, lng;
 
+        function getdetails() {
+            var value = $('#userId').val();
+            return $.ajax({
+                type: "POST", 
+                url: "getInfo.php",
+                data: {id: value}
+            })
+
+        }   
+
         function initMap() {
             navigator.geolocation.watchPosition((position) => {
                 console.log(position.coords);
@@ -68,6 +78,7 @@
 
                 // Add a marker to the map
                 marker = L.marker([lat, lng]).addTo(map);
+                // marker = L.marker([24.111111, 120.99999]).addTo(map);
             });
         }
         initMap();
@@ -75,7 +86,22 @@
 
 <div class="board__hr"></div>
 
+<?php $result = require_once("connect.php"); ?>
 <?php require_once("content.php"); ?>
+
+<div class="board__hr"></div>
+
+<?php 
+
+// require_once("connect.php"); 
+// for ($i = 0; $row = $result->fetch_assoc(); $i++) {
+//     // Print or use the data as needed
+//     echo "Row $i: ";
+//     print_r($row); // You can use print_r, var_dump, or any other method to display the data
+//     echo "<br>";
+// }
+
+?>
 
 <div class="board__hr"></div>
 
