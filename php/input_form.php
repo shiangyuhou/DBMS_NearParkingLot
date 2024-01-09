@@ -8,10 +8,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>停車位查詢系統</title>
     <link rel="stylesheet" href="basic.css"/>
-    
+    <script>
+    function submitForm() {
+        // Get all checked checkboxes
+        var checkboxes = document.querySelectorAll('#myForm input[type="checkbox"]:checked');
+
+        // Create a FormData object to store the form data
+        var formData = new FormData();
+
+        // Loop through checked checkboxes and append them to the FormData object
+        checkboxes.forEach(function(checkbox) {
+            formData.append(checkbox.name, checkbox.value);
+        });
+
+        // Use the Fetch API to make a POST request
+        fetch('query.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(jsonData => {
+            console.log(jsonData);
+            // Handle the response as needed
+            // document.getElementById('jsonDisplay').innerText = JSON.stringify(jsonData, null, 2);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>
 </head>
-<form action = "query.php" method = "POST">
-<body>
+
+<!-- <form action = "query.php" method = "POST"> -->
+    
+    <body>
+    <form id="myForm">
     <div>
         <h1><b>停車位查詢系統</b></h1>
         <br/>
@@ -107,7 +138,9 @@
             
         </div>
         <input type="submit" value = "查詢">
+        <button type="button" onclick="submitForm()">Submit</button>
     </div>
+</form>
     <script>
        var districtData = [
             {
@@ -156,5 +189,5 @@
         } 
     </script>
 </body>
-</form>
+<!-- </form> -->
 </html>

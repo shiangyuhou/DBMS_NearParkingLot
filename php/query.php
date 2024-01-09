@@ -7,7 +7,7 @@ if (!$seldb){
     die("chooseing fail");
 }
 
-$sql_query1 = "SELECT DISTINCT C1.CarParkName_Zh_tw FROM CarParks C1 ";
+$sql_query1 = "SELECT DISTINCT C1.CarParkName_Zh_tw, C1.PositionLat, C1.PositionLon FROM CarParks C1 ";
 $parkty = @$_POST['parkingtype'];
 if ($parkty != "") {
     $sql_query1 = $sql_query1." JOIN ParkingSpace PS1 ON (C1.CarParkID = PS1.CarParkID AND C1.CarParkName_Zh_tw = PS1.CarParkName_Zh_tw) ";
@@ -109,17 +109,25 @@ foreach ($facili as $item){
 $sql_query1 = $sql_query1." LIMIT 10;";
 
 
-echo $sql_query1."<br>";
+// echo $sql_query1."<br>";
 
 $sql_query2 = "SELECT * FROM CarParks limit 4;";
 
 $result = mysqli_query($db_link, $sql_query1);
-// $result = mysqli_query($db_link, $sql_query2);
-while($row_result = mysqli_fetch_row($result)){
-    foreach($row_result as $item=>$value){
-        echo $item.". ".$value."<br />";
-    }
-    echo "<hr />";
+
+// echo $result;
+$data = array();
+while ($row = mysqli_fetch_assoc($result)) {
+    $data[] = $row;
 }
+mysqli_free_result($result);
+$jsonData = json_encode($data);
+echo $jsonData;
+// while($row_result = mysqli_fetch_row($result)){
+//     foreach($row_result as $item=>$value){
+//         echo $item.". ".$value."<br />";
+//     }
+//     echo "<hr />";
+// }
 
 ?>
