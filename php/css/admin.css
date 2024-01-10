@@ -56,13 +56,22 @@ body {
     letter-spacing: 0;
     opacity: .87;
 }
-.buttonadmin {
-  float: right;
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    font-size: 16px;
-    cursor: pointer;
+.custom-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid #3498db; /* 按鈕邊框顏色 */
+  color: #3498db; /* 按鈕文字顏色 */
+  border-radius: 5px; /* 圓角 */
+  transition: background-color 0.3s ease;
+}
+/* 按鈕的懸停狀態樣式 */
+.custom-button:hover {
+  background-color: #3498db; /* 懸停時的背景顏色 */
+  color: #fff; /* 懸停時的文字顏色 */
 }
 
