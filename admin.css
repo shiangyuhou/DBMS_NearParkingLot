@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+    padding: 0;
+  }
+
+  #top {
+    background-color: #3498db;
+    height: 100px;
+    text-align: center;
+    color: white;
+    padding-top: 20px;
+    display: flex;
+    white-space: nowrap;
+  }
+
+  #bottom {
+    display: flex;
+    position: fixed;
+    top: 120px; 
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  #bottom-left {
+    background-color: #adc5b7;
+    flex: 1; /* 占据剩余空间 */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  #bottom-right {
+    
+    flex: 6; /* 占据底部区块的5倍宽度 */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .mdl-navigation {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    -ms-grid-row-align: stretch;
+    align-items: center;
+    justify-content: center;
+    padding-top: 16px;
+}
+  .mdl-navigation_link {
+    color: #131322;
+    text-decoration: none;
+    margin: 0;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 50px;
+    letter-spacing: 0;
+    opacity: .87;
+}
+.buttonadmin {
+  float: right;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
