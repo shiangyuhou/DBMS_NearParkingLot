@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="css/admin.css">
   <script>
     function add(){
         document.getElementById("homepage").style.display="none";
@@ -64,10 +64,8 @@
     <div class="container">
         
             <h1>停車場管理系統</h1>
+            
         
-        <div class="link">
-            <a href="index.php" class="link">回首頁</a>
-        </div>
     </div>
   </div>
 
@@ -77,6 +75,7 @@
             <ul><a class="mdl-navigation_link" href="#add" onclick="add();" >新增停車場</a></ul>
             <ul><a class="mdl-navigation_link" href="#edit" onclick="edt();" >編輯停車場</a></ul>
             <ul><a class="mdl-navigation_link" href="#delete" onclick="del();" >刪除停車場</a></ul>
+            <ul><a href="index.php" class="custom-button">回首頁</a></ul>
         </nav>
     </div>
 
@@ -223,6 +222,10 @@
             <form action="process_add.php" method="post" >
                 <h2>新增停車場資料</h2>
                 <button type="submit" >匯入內建檔案</button>
+            </form>
+            <label for="or">或</label>
+            <form action="process_add_manually.php" method="post" >
+                <button type="submit" >手動新增資料</button>
             </form>
         </div>
         <!--編輯停車場-->

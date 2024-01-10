@@ -19,6 +19,7 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
             exit;
         }else{
             echo "Error deleting table: " . mysqli_error($conn);
+            echo "<a href='admin.php'>返回系統</a>";
         }
     }
     else{
