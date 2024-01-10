@@ -23,7 +23,7 @@ curl --request POST \
     | jq '.access_token' > $text_file
 TOKEN=$(<"$text_file" tr -d '"')
 
-# ./requireAPI.sh $root $TOKEN
+./requireAPI.sh $root $TOKEN
 
 
 # echo $token

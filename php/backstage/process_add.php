@@ -1,5 +1,5 @@
 <?php
-$conn=require_once("config.php");
+$conn=require_once("../connect.php");
 
 if($_SERVER["REQUEST_METHOD"]==="POST"){
     $tableName = "CarParks";
