@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/content.css">
     <link rel="stylesheet" href="css/card.css">
     <link rel="stylesheet" href="css/nevigator.css">
-    <script src="mapfunc.js"></script>
+    <link rel="stylesheet" href="css/map.css">
     <!-- Open Street Map -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -22,6 +22,7 @@
 
 
 <body>
+
 <main>
 <div class="board__header">
     <div class="border__word-block">
@@ -47,7 +48,7 @@
     </div>
 
 </div>
-
+<div class="board__inline">
 <form id="myForm">
     <div>
         <h1><b>停車位查詢系統</b></h1>
@@ -80,7 +81,7 @@
 
         <h3><b>使用者參考位置(GPS)</b></h3>
         <p id="demo"></p>
-        <script src="locate.js"></script>
+        
 
         <h3><b>輸入篩選條件</b></h3>
         <div class="table" width="800" style="color: blue;">
@@ -105,7 +106,7 @@
                         <td  rowspan="2" background-color:>停車場資訊</td>
                         <td>停車場類型</td>
                         <td class="options-container">
-                            <input type="radio" name="parkingcharacter" value="option1">不限
+                            <label><input type="radio" name="parkingcharacter" value="option1">不限</label>
                             <input type="radio" name="parkingcharacter" value="option2">平面
                             <input type="radio" name="parkingcharacter" value="option3">立體
                             <input type="radio" name="parkingcharacter" value="option4">地下
@@ -114,7 +115,7 @@
                     <tr>
                         <td>停車位類型</td>
                         <td class="options-container">
-                        <input type="radio" name="parkingtype" value="option1">不限
+                        <label><input type="radio" name="parkingtype" value="option1">不限</label>
                         <input type="radio" name="parkingtype" value="option2">機車
                         <input type="radio" name="parkingtype" value="option3">小客車
                         <input type="radio" name="parkingtype" value="option4">大客車
@@ -126,7 +127,7 @@
                         <td rowspan="1">收費方式</td>
                         <td>支付計算方式</td>
                         <td class="options-container">
-                            <input type="radio" name="frequency" value="option1">不限
+                            <label><input type="radio" name="frequency" value="option1">不限</label>
                             <input type="radio" name="frequency" value="option2">非營業期間免費
                             <input type="radio" name="frequency" value="option3">可月租
                             <input type="radio" name="frequency" value="option4">可季租
@@ -178,6 +179,7 @@
 </form>
 
 <div class='board__body'></div>
+</div>
 <!-- <div class="board__hr"></div>
 
 <div class="board_map"> 
@@ -209,5 +211,16 @@
 
 
 </main>
+<!-- <script>
+    
+    window.onload = function(){
+        addMap();
+        getLocation();
+        map = initMap();
+    }; 
+</script> -->
+<script src="locate.js"></script>
+<script src="mapfunc.js"></script>
+
 </body>
 </html>

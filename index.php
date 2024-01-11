@@ -125,7 +125,7 @@
                         <input type="radio" name="parkingtype" value="option2">機車
                         <input type="radio" name="parkingtype" value="option3">小客車
                         <input type="radio" name="parkingtype" value="option4">大客車
-                        <input type="radio" name="parkingtype" value="option5">其他
+                        <input type="radio" name="parkingtype" value="option5">其他</input>
                         </td>
                     </tr>
                     <!--收費方式-->

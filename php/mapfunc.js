@@ -3,7 +3,7 @@ var markers = [];
 
 // newMap.addTo(L.map('differentDiv'));
 function generateContent(data){
-    const collection = document.getElementsByClassName("board__content");
+    const collection = document.getElementsByClassName("board__inline");
 
     const body = document.createElement('div');
     body.classList.add('board__body');
@@ -98,7 +98,10 @@ function generateCards(data) {
         cardContent.classList.add('card__content');
 
         var carParkIdHeading = document.createElement('h2');
-        carParkIdHeading.textContent = 'CarParkID: ' + row['CarParkName_Zh_tw'];
+        carParkIdHeading.textContent =  row['CarParkName_Zh_tw'];
+
+        var carParkAddress = document.createElement('div');
+        carParkAddress.textContent =  row['Address'];
 
         var cardContent2 = document.createElement('p');
         cardContent2.classList.add('card__content');
@@ -107,6 +110,7 @@ function generateCards(data) {
         cardBody.appendChild(cardInfo);
         cardBody.appendChild(cardContent);
         cardBody.appendChild(carParkIdHeading);
+        cardBody.appendChild(carParkAddress);
         cardBody.appendChild(cardContent2);
 
         card.appendChild(cardAvatar);
@@ -119,6 +123,30 @@ function generateCards(data) {
         // document.body.appendChild(card);
     });
     return list;
+}
+
+function initMap1(jsonData) {
+    // var initialCoords = (locate != null) ? locate : { lo: 0, la: 0 };
+    // Initialize the map using Leaflet and OpenStreetMap
+    var newmap;
+    navigator.geolocation.watchPosition((position) => {
+        console.log(position.coords);
+        lat = position.coords.latitude;
+        lng = position.coords.longitude;
+        newmap = L.map('map').setView([lat, lng], 18);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(newmap);
+
+        // Add markers for each set of coordinates in the jsonData
+        jsonData.forEach(function (data) {
+            var marker = L.marker([data.PositionLat, data.PositionLon]).addTo(newmap);
+            markers.push(marker);
+        });
+    });
+    // map = newmap;
+
+    return newmap;
 }
 
 function initMap(jsonData) {
@@ -141,25 +169,35 @@ function initMap(jsonData) {
 }
 
 
+function addMap(){
+    var mapptr_ = document.createElement('div');
+    mapptr_.style.height = "400px";
+    mapptr_.id="map";
+    var body_ = document.getElementsByClassName('board__body');
+    body_[0].appendChild(mapptr_);
+}
 
-// function initMap() {
-//     if(map){map.remove();}
-//     navigator.geolocation.watchPosition((position) => {
-//         console.log(position.coords);
-//         lat = position.coords.latitude;
-//         lng = position.coords.longitude;
+function initialMap() {
+    console.log("first time init map");
+    // if(map){map.remove();}
+    navigator.geolocation.watchPosition((position) => {
+        console.log(position.coords);
+        lat = position.coords.latitude;
+        lng = position.coords.longitude;
         
-//         console.log(lat);
-//         console.log(lng);
-//         // Initialize the map using Leaflet and OpenStreetMap
-//         var newmap = L.map('map').setView([lat, lng], 18);
-//         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//             attribution: '© OpenStreetMap contributors'
-//         }).addTo(newmap);
+        console.log(lat);
+        console.log(lng);
+        // Initialize the map using Leaflet and OpenStreetMap
+        var newmap = L.map('map').setView([lat, lng], 18);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(newmap);
 
-//         // Add a marker to the map
-//         marker = L.marker([lat, lng]).addTo(newmap);
-//         // map = newmap;
-//         return newmap;
-//     });
-// }
+        // Add a marker to the map
+        L.marker([lat, lng]).addTo(newmap);
+        // marker.push(marker);
+
+        // map = newmap;
+        return newmap;
+    });
+}

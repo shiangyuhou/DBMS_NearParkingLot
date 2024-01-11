@@ -15,15 +15,18 @@ function showPosition(position) {
     // la=string(position.coords.latitude);
     document.getElementById("long").value = position.coords.longitude;
     document.getElementById("lat").value = position.coords.latitude;
-    console.log(lo);
+    // console.log(lo);
 
     // Manipulate CSS based on the obtained geolocation
     x.style.color = "blue"; // Change text color to blue
     x.style.fontWeight = "bold"; // Make the text bold
     // Add more CSS properties as needed
 }
+    
+window.onload = function(){
+    addMap();
+    getLocation();
+    map = initialMap();
+}; 
 
-// window.onload = function(){
-//     getLocation();
-// };
-getLocation();
+// getLocation();
