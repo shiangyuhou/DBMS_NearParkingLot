@@ -13,15 +13,19 @@ $long = @$_POST["long"];
 $date = @$_POST["datetime"];
 $week = date("l", strtotime($date));
 
-$sql_query1 = "SELECT DISTINCT C1.CarParkName_Zh_tw, C1.PositionLat, C1.PositionLon, C1.Address, PK.PaymentDescription FROM CarParks C1 
-                JOIN ParkingTicketing PK ON C1.CarParkID = PK.CarParkID AND C1.CarParkName_Zh_tw = PK.CarParkName_Zh_tw";
+$sql_query1 = "SELECT DISTINCT C1.CarParkName_Zh_tw, C1.PositionLat, C1.PositionLon, C1.Address, PK.PaymentDescription, D1.AvailableSpaces FROM CarParks C1 
+             LEFT JOIN ParkingTicketing PK ON (C1.CarParkID = PK.CarParkID AND C1.CarParkName_Zh_tw = PK.CarParkName_Zh_tw) ";
 
 $parkty = @$_POST['parkingtype'];
 if ($parkty != "") {
     $sql_query1 = $sql_query1." JOIN ParkingSpace PS1 ON (C1.CarParkID = PS1.CarParkID AND C1.CarParkName_Zh_tw = PS1.CarParkName_Zh_tw) ";
 }
 $zo = @$_POST["zone"];
-$sql_query1 = $sql_query1." JOIN ParkingServiceTime PST1 ON (C1.CarParkID = PST1.CarParkID AND C1.CarParkName_Zh_tw = PST1.CarParkName_Zh_tw) ";
+$sql_query1 = $sql_query1." LEFT JOIN ParkingServiceTime PST1 ON (C1.CarParkID = PST1.CarParkID AND C1.CarParkName_Zh_tw = PST1.CarParkName_Zh_tw) ";
+
+$sql_query1 = $sql_query1." LEFT JOIN dynamic D1 ON (C1.CarParkID = D1.CarParkID AND C1.CarParkName_Zh_tw = D1.CarParkName_Zh_tw) ";
+
+
 $sql_query1 = $sql_query1." WHERE ";
 
 $parkingchar = @$_POST["parkingcharacter"];
@@ -195,8 +199,8 @@ foreach ($facili as $item){
 }
 
 
-$immi = @$_POST["immediatesearch"];
-if($immi == "option2")$sql_query1 = $sql_query1." AND C1.LiveOccuppancyAvailable = 1 ";
+// $immi = @$_POST["immediatesearch"];
+// if($immi == "option2")$sql_query1 = $sql_query1." AND C1.LiveOccuppancyAvailable = 1 ";
 
 $lat = (float)$lat;
 $long = (float)$long;

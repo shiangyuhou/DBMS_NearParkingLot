@@ -56,18 +56,22 @@ function submitForm() {
         // } else {
         //     formData.append(element.name, element.value);
         // }
-        if (element.type === 'checkbox' || element.type === 'radio') {
-            formData.append(element.name, element.value);
-        } else if (element.type === 'select-one' || element.type === 'select-multiple') {
-            // For select elements, iterate through selected options
-            var selectedOptions = element.selectedOptions;
-            for (var i = 0; i < selectedOptions.length; i++) {
-                formData.append(element.name, selectedOptions[i].value);
+        // var selectElement = document.getElementsByName('zone')[0];
+        // var selectedValue = selectElement.options[selectElement.selectedIndex].value;
+        // formData.append("zone", selectedValue);
+            if (element.type === 'checkbox' || element.type === 'radio') {
+                formData.append(element.name, element.value);
             }
-        } else {
-            formData.append(element.name, element.value);
-        }
+            else {
+                formData.append(element.name, element.value);
+            }
     });
+    var selectElement = document.getElementById("district");
+    // Get the selected value
+    var selectedValue = selectElement.value;
+    formData.append("zone", selectedValue);
+    console.log("zone" + formData.get("zone"));
+    console.log("long" + formData.get("long"));
     // formData.append(checkbox.name, checkbox.value);
 
 

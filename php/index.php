@@ -57,7 +57,7 @@
         <br/>
         <h3><b>輸入所在地</b></h3>
         <label for="district">選擇行政區：</label>
-        <select name = "zone">
+        <select id="district" name = "zone">
             <option value= "基隆市" >基隆市</option>
             <option value= "臺北市" >臺北市</option>
             <option value= "桃園市" >桃園市</option>
