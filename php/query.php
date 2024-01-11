@@ -6,7 +6,7 @@ $seldb = mysqli_select_db($db_link, "fp");
 if (!$seldb){
     die("chooseing fail");
 }
-
+// echo @$_POST['zone'];
 $lat = @$_POST["lat"];
 $long = @$_POST["long"];
 
@@ -18,7 +18,7 @@ $sql_query1 = "SELECT DISTINCT C1.CarParkName_Zh_tw, C1.PositionLat, C1.Position
 
 $parkty = @$_POST['parkingtype'];
 if ($parkty != "") {
-    $sql_query1 = $sql_query1." JOIN ParkingSpace PS1 ON (C1.CarParkID = PS1.CarParkID AND C1.CarParkName_Zh_tw = PS1.CarParkName_Zh_tw) ";
+    $sql_query1 = $sql_query1." LEFT JOIN ParkingSpace PS1 ON (C1.CarParkID = PS1.CarParkID AND C1.CarParkName_Zh_tw = PS1.CarParkName_Zh_tw) ";
 }
 $zo = @$_POST["zone"];
 $sql_query1 = $sql_query1." LEFT JOIN ParkingServiceTime PST1 ON (C1.CarParkID = PST1.CarParkID AND C1.CarParkName_Zh_tw = PST1.CarParkName_Zh_tw) ";
@@ -48,7 +48,7 @@ switch($parkingchar){
 }
 
 switch($zo){
-    case"基隆市":
+    case"keelung":
         $sql_query1 = $sql_query1." AND C1.CityCode = \"KEE\" ";
         break;
     case"臺北市":
@@ -130,7 +130,7 @@ switch($parkty){
     case "":
         break;
     case "option1":
-        $sql_query1 = $sql_query1." AND PS1.SpaceType = 0 ";
+        $sql_query1 = $sql_query1." AND PS1.SpaceType < 256 ";
         break; 
     case "option2":
         $sql_query1 = $sql_query1." AND (PS1.SpaceType = 0 OR  PS1.SpaceType = 2) ";
@@ -206,13 +206,13 @@ $lat = (float)$lat;
 $long = (float)$long;
 
 
-$sql_query1 = $sql_query1." ORDER BY ((100 * (C1.PositionLat - ";
+$sql_query1 = $sql_query1." ORDER BY ((111 * (C1.PositionLat - ";
 $sql_query1 = $sql_query1.$lat;
-$sql_query1 = $sql_query1.") * 100 * (C1.PositionLat - ";
+$sql_query1 = $sql_query1.") * 111 * (C1.PositionLat - ";
 $sql_query1 = $sql_query1.$lat;
-$sql_query1 = $sql_query1.")) + (111 * (C1.PositionLon - ";
+$sql_query1 = $sql_query1.")) + (100 * (C1.PositionLon - ";
 $sql_query1 = $sql_query1.$long;
-$sql_query1 = $sql_query1.") * 111 * (C1.PositionLon - ";
+$sql_query1 = $sql_query1.") * 100 * (C1.PositionLon - ";
 $sql_query1 = $sql_query1.$long;
 $sql_query1 = $sql_query1."))) ASC LIMIT 10;";
 
