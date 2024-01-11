@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-tw">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/admin.css">
-  <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/admin.css">
+    <style>
         /* 隱藏類別 */
         .hidden {
             display: none;
@@ -14,7 +14,7 @@
 </head>
 <body>
 <?php
-$conn=require_once("config.php");
+$conn=require_once("../connect.php");
 
 if($_SERVER["REQUEST_METHOD"]==="POST"){
             

@@ -11,3 +11,4 @@ drop table ParkingSpace;
 drop table ParkingSpot;
 drop table ParkingSpotAvailability;
 drop table ParkingTicketing;
+drop table `dynamic`;

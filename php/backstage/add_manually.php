@@ -1,5 +1,5 @@
 <?php
-$conn=require_once("config.php");
+$conn=require_once("../connect.php");
 
 if($_SERVER["REQUEST_METHOD"]==="POST"){
     
@@ -107,8 +107,8 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
         $TicketingValidatorType_Others = $_POST['TicketingValidatorType_Others'];
 
 
-        $insertCarParks="INSERT INTO CarParks (CarParkID,CarParkName_Zh_tw,OperatorID,`Description`,CarParkType,ParkingGuideType,CarParkPosition_PositionLat,CarParkPosition_PositionLon,`Address`,FareDescription,IsFreeParkingOutOfHours,
-        IsPublic,IsMotorcycle,OperationType,LiveOccuppancyAvailable,EVRechargingAvailable,MonthlyTicketAvailable,SeasonTicketiAvalable,ReservationAvailable,WheelchairAccessible,OvernightPermitted,TicketMachine,Toilet,Restaurant,GasStation,
+        $insertCarParks="INSERT INTO CarParks (CarParkID,CarParkName_Zh_tw,OperatorID,`Description`,CarParkType,ParkingGuideType,PositionLat,PositionLon,`Address`,FareDescription,IsFreeParkingOutOfHours,
+        IsPublic,IsMotorcycle,OperationType,LiveOccupancyAvailable,EVRechargingAvailable,MonthlyTicketAvailable,ReservationAvailable,WheelchairAccessible,OvernightPermitted,TicketMachine,Toilet,Restaurant,GasStation,
         Shop,Gated,Lighting,SecureParking,TicketOffice,ProhibitedForAnyHazardousMaterialLoads,SecurityGuard,Supervision,City,CityCode)
         VALUES ('$CarParkID','$CarParkName_Zh_tw',
             '$OperatorID',
@@ -126,7 +126,7 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
             '$LiveOccuppancyAvailable',
             '$EVRechargingAvailable',
             '$MonthlyTicketAvailable',
-            '$SeasonTicketAvailable',
+            -- '$SeasonTicketAvailable',
             '$ReservationAvailable',
             '$WheelchairAccessible',
             '$OvernightPermitted',
@@ -149,7 +149,7 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
         ServiceDay_Wednesday,ServiceDay_Thursday,ServiceDay_Friday,ServiceDay_Saturday,ServiceDay_Sunday,ServiceDay_NationalHolidays,`Description`,StartTime,
         EndTime,FreeOfCharge)
         VALUES (
-            '$CarParkID',='$CarParkName_Zh_tw',
+            '$CarParkID','$CarParkName_Zh_tw',
               '$ServiceDay_ServiceTag',
               '$ServiceDay_Monday',
               '$ServiceDay_Tuesday',
@@ -173,12 +173,12 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
             '$NumberOfSpaces',
             '$StayType')";
 
-        $insertParkingTicketing="INSERT INTO Parkingticketing 
+        $insertParkingTicketing="INSERT INTO ParkingTicketing 
         (CarParkID,CarParkName_Zh_tw,HasInvoice,InvoiceType_DuplicateUniform,InvoiceType_TriplicateUniform,InvoiceSupport_BANPrinted,InvoiceSupport_Donation,HasEInvoice,HasEInvoiceCarrier,EInvoiceCarrierType_Generic,
         EInvoiceCarrierType_SmartCard,EInvoiceCarrierType_CreditCard,EInvoiceCarrierType_DebitCard,EInvoiceCarrierType_MemberCard,EInvoiceCarrierType_DonationCode,PaymentProcess_PayAndDisplay,PaymentProcess_PayByPrepaidToken,
         PaymentProcess_PayAtExitBoothManualCollection,PaymentProcess_PayAtMachineOnFootPriorToExit,PaymentProcess_PayBySmartCard, PaymentProcess_PayByMobile,PaymentProcess_PayByEtag,PaymentProcess_Others,PaymentMethod_Cash,
-        PaymentMethod_CreditCard,PaymentMethod_SmartCard,PaymentMethod_ETC,PaymentMethod_MobilePayment,PaymentMethod_Token,PaymentMethod_Others,SmartCard_EasyCard,SmartCard_IPASS,SmartCard_ICash,SmartCard_HappyCash
-        PaymentDescription,TicketingMachine_DisabledFriendly,HasTicketingValidator,TicketingValidatorType_Contactless,TicketingValidatorType_Magnetic,TicketingValidatorType_NFC,TicketingValidatorType_RFID,TicketingValidatorType_Others
+        PaymentMethod_CreditCard,PaymentMethod_SmartCard,PaymentMethod_ETC,PaymentMethod_MobilePayment,PaymentMethod_Token,PaymentMethod_Others,SmartCard_EasyCard,SmartCard_IPASS,SmartCard_ICash,SmartCard_HappyCash,
+        PaymentDescription,TicketingMachine_DisabledFriendly,HasTicketingValidator,TicketingValidatorType_Contactless,TicketingValidatorType_Magnetic,TicketingValidatorType_NFC,TicketingValidatorType_RFID,TicketingValidatorType_Others,
         HasTicketingMachine)
         VALUES (
             '$CarParkID','$CarParkName_Zh_tw',

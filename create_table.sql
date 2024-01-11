@@ -258,6 +258,16 @@ CREATE TABLE IF NOT EXISTS ParkingTicketing (
 
 );
 
+CREATE TABLE IF NOT EXISTS `dynamic` (
+    primary key (CarParkID, CarParkName_Zh_tw),
+    CarParkID VARCHAR(20),
+    CarParkName_Zh_tw VARCHAR(40),
+    TotalSpaces int,
+    AvailableSpaces int,
+    DataCollectTime VARCHAR(80)
+);
+
+
 
 load data local infile './data_csv/CarPark_output.csv'
 into table CarParks

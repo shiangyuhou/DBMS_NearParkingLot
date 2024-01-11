@@ -40,14 +40,36 @@ function removeContent(){
 }
 function submitForm() {
     // Get all checked checkboxes
-    var checkboxes = document.querySelectorAll('#myForm input[type="checkbox"]:checked');
+    var formElements  = document.querySelectorAll('#myForm input[type="checkbox"]:checked, #myForm input[type="radio"]:checked, #myForm input[type="text"], #myForm input[type="date"]');
+    // var districts = document.querySelectorAll('#myForm input[type="radio"]:checked');
     // Create a FormData object to store the form data
-    var formData = new FormData();
+    // var formData = new FormData();
 
     // Loop through checked checkboxes and append them to the FormData object
-    checkboxes.forEach(function(checkbox) {
-        formData.append(checkbox.name, checkbox.value);
+    // checkboxes.forEach(function(checkbox) {
+    //     formData.append(checkbox.name, checkbox.value);
+    // });
+    var formData = new FormData();
+    formElements.forEach(function(element) {
+        // if (element.type === 'checkbox' || element.type === 'radio') {
+        //     formData.append(element.name, element.value);
+        // } else {
+        //     formData.append(element.name, element.value);
+        // }
+        if (element.type === 'checkbox' || element.type === 'radio') {
+            formData.append(element.name, element.value);
+        } else if (element.type === 'select-one' || element.type === 'select-multiple') {
+            // For select elements, iterate through selected options
+            var selectedOptions = element.selectedOptions;
+            for (var i = 0; i < selectedOptions.length; i++) {
+                formData.append(element.name, selectedOptions[i].value);
+            }
+        } else {
+            formData.append(element.name, element.value);
+        }
     });
+    // formData.append(checkbox.name, checkbox.value);
+
 
     // Use the Fetch API to make a POST request
     fetch('query.php', {
@@ -161,6 +183,20 @@ function initMap(jsonData) {
         attribution: '© OpenStreetMap contributors'
     }).addTo(newmap);
 
+    
+// function getLocation1() {
+//     map.locate({
+//         setView: true,
+//         enableHighAccuracy: true
+//     })
+//     .on('locationfound', function(e) {
+//         var marker = new L.marker(e.latlng);
+//         marker.addTo(map);
+//     });
+//     }
+
+//     getLocation1(); // Call the function to get the location
+
     // Add markers for each set of coordinates in the jsonData
     jsonData.forEach(function (data) {
         var marker = L.marker([data.PositionLat, data.PositionLon]).addTo(newmap);
@@ -183,7 +219,7 @@ function addMap(){
 
 function initialMap() {
     console.log("first time init map");
-    // if(map){map.remove();}
+    if(map){map.remove();}
     navigator.geolocation.watchPosition((position) => {
         console.log(position.coords);
         lat = position.coords.latitude;

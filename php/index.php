@@ -31,6 +31,8 @@
     <div class="board__btn-block">
         <!-- <a class="board__btn" href="register.php">Sign up</a> -->
         <a class="board__btn" href="login.php">Log in</a>
+        <a class="board__btn" href="require_api.php">insert</a>
+        <a class="board__btn" href="update_dy.php">update</a>
         
     </div>
 

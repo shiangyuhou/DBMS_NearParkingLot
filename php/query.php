@@ -226,8 +226,10 @@ while ($row = mysqli_fetch_assoc($result)) {
     $data[] = $row;
 }
 mysqli_free_result($result);
+// mysqli_close($conn);
 $jsonData = json_encode($data);
 echo $jsonData;
+
 // return 
 // echo '<table border="1" style="width: 100%;">';
 // echo '<tr><th>停車場名稱</th><th>地址</th><th>收費方式</th></tr>';
