@@ -1,5 +1,5 @@
 <?php
-$conn=require_once("config.php");
+$conn=require_once("../connect.php");
 
 if($_SERVER["REQUEST_METHOD"]==="POST"){
     
@@ -7,7 +7,7 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
     $originCarParkName_Zh_tw=$_POST["originCarParkName_Zh_tw"];
     
     //檢查table內是否有該筆資料
-    $check="SELECT * FROM carparks WHERE CarParkID='$originCarParkID' AND  CarParkName_Zh_tw='$originCarParkName_Zh_tw'";
+    $check="SELECT * FROM CarParks WHERE CarParkID='$originCarParkID' AND  CarParkName_Zh_tw='$originCarParkName_Zh_tw'";
     if(mysqli_num_rows(mysqli_query($conn,$check))>0){
         $CarParkID=$_POST["CarParkID"];
         $CarParkName_Zh_tw=$_POST["CarParkName_Zh_tw"];
@@ -48,19 +48,18 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
         
 
         $ServiceDay_ServiceTag = $_POST['ServiceDay_ServiceTag'];
-        $ServiceDay_Monday = $_POST['ServiceDay_Monday'];
-        $ServiceDay_Tuesday = $_POST['ServiceDay_Tuesday'];
-        $ServiceDay_Wednesday = $_POST['ServiceDay_Wednesday'];
-        $ServiceDay_Thursday = $_POST['ServiceDay_Thursday'];
-        $ServiceDay_Friday = $_POST['ServiceDay_Friday'];
-        $ServiceDay_Saturday = $_POST['ServiceDay_Saturday'];
-        $ServiceDay_Sunday = $_POST['ServiceDay_Sunday'];
-        $ServiceDay_NationalHolidays = $_POST['ServiceDay_NationalHolidays'];
+        $ServiceDay_Monday = ($_POST['ServiceDay_Monday'] == null) ? 0 : $_POST['ServiceDay_Monday'];
+        $ServiceDay_Tuesday = ($_POST['ServiceDay_Tuesday'] == null) ? 0 : $_POST['ServiceDay_Tuesday'];
+        $ServiceDay_Wednesday = ($_POST['ServiceDay_Wednesday'] == null) ? 0 : $_POST['ServiceDay_Wednesday'];
+        $ServiceDay_Thursday = ($_POST['ServiceDay_Thursday'] == null) ? 0 : $_POST['ServiceDay_Thursday'];
+        $ServiceDay_Friday = ($_POST['ServiceDay_Friday'] == null) ? 0 : $_POST['ServiceDay_Friday'];
+        $ServiceDay_Saturday = ($_POST['ServiceDay_Saturday'] == null) ? 0 : $_POST['ServiceDay_Saturday'];
+        $ServiceDay_Sunday = ($_POST['ServiceDay_Sunday'] == null) ? 0 : $_POST['ServiceDay_Sunday'];
+        $ServiceDay_NationalHolidays = ($_POST['ServiceDay_NationalHolidays'] == null) ? 0 : $_POST['ServiceDay_NationalHolidays'];
         $ServiceTimeDescription = $_POST['ServiceTimeDescription'];
         $StartTime = $_POST['StartTime'];
         $EndTime = $_POST['EndTime'];
         $FreeOfCharge = $_POST['FreeOfCharge'];
-
         $TotalSpaces=$_POST['TotalSpaces'];
         $SpaceType=$_POST['SpaceType'];
         $IsMechanical=$_POST['IsMechanical'];
@@ -111,41 +110,47 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
         $TicketingValidatorType_Others = $_POST['TicketingValidatorType_Others'];
 
 
-        $updateCarParks="UPDATE CarParks SET CarParkID='$CarParkID',CarParkName_Zh_tw='$CarParkName_Zh_tw',
+        $updateCarParks="UPDATE CarParks SET
+            CarParkID='$CarParkID',
+            CarParkName_Zh_tw='$CarParkName_Zh_tw',
             OperatorID='$OperatorID',
             `Description`='$Description',
             CarParkType='$CarParkType',
             ParkingGuideType='$ParkingGuideType',
-            CarParkPosition_PositionLat='$CarParkPosition_PositionLat',
-            CarParkPosition_PositionLon='$CarParkPosition_PositionLon',
-            `Address`='$Address',
-            FareDescription='$FareDescription',
-            IsFreeParkingOutOfHours='$IsFreeParkingOutOfHours',
-            IsPublic='$IsPublic',
+            
+            
+//             IsFreeParkingOutOfHours='$IsFreeParkingOutOfHours',
+//             IsPublic='$IsPublic',
+//             OperationType='$OperationType',
+            PositionLat='$CarParkPosition_PositionLat',
+            PositionLon='$CarParkPosition_PositionLon',
+            `Address`='$Address',FareDescription='$FareDescription',
             IsMotorcycle='$IsMotorcycle',
-            OperationType='$OperationType',
-            LiveOccuppancyAvailable='$LiveOccuppancyAvailable',
+            LiveOccupancyAvailable='$LiveOccuppancyAvailable',
             EVRechargingAvailable='$EVRechargingAvailable',
             MonthlyTicketAvailable='$MonthlyTicketAvailable',
             SeasonTicketAvailable='$SeasonTicketAvailable',
             ReservationAvailable='$ReservationAvailable',
             WheelchairAccessible='$WheelchairAccessible',
             OvernightPermitted='$OvernightPermitted',
+            /add
             TicketMachine='$TicketMachine',
             Toilet='$Toilet',
             Restaurant='$Restaurant',
             GasStation='$GasStation',
             Shop='$Shop',
+            // add
             Gated='$Gated',
-            Lighting='$Lighting',
-            SecureParking='$SecureParking',
             TicketOffice='$TicketOffice',
             ProhibitedForAnyHazardousMaterialLoads='$ProhibitedForAnyHazardousMaterialLoads',
-            SecurityGuard='$SecurityGuard',
-            Supervision='$Supervision',
             City='$City',
             CityCode='$CityCode'
-            WHERE CarParkID='$originCarParkID' AND  CarParkName_Zh_tw='$originCarParkName_Zh_tw'";
+            // 
+            Lighting='$Lighting',
+            SecureParking='$SecureParking',
+            SecurityGuard='$SecurityGuard',
+            Supervision='$Supervision' 
+              WHERE CarParkID='$originCarParkID' AND  CarParkName_Zh_tw='$originCarParkName_Zh_tw'";
 
         $updateParkingServiceTime="UPDATE ParkingServiceTime SET
             CarParkID='$CarParkID',CarParkName_Zh_tw='$CarParkName_Zh_tw',
@@ -174,7 +179,7 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
             WHERE CarParkID='$originCarParkID' AND  CarParkName_Zh_tw='$originCarParkName_Zh_tw'
         ";
 
-        $updateParkingTicketing="UPDATE Parkingticketing SET
+        $updateParkingTicketing="UPDATE ParkingTicketing SET
             CarParkID='$CarParkID',CarParkName_Zh_tw='$CarParkName_Zh_tw',
             HasInvoice = '$HasInvoice',
             InvoiceType_DuplicateUniform = '$InvoiceType_DuplicateUniform',
@@ -218,10 +223,17 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
             TicketingValidatorType_Others = '$TicketingValidatorType_Others',
             HasTicketingMachine = '$HasTicketingMachine' WHERE CarParkID='$originCarParkID' AND  CarParkName_Zh_tw='$originCarParkName_Zh_tw'
         ";
+        // mysqli_query($conn, $updateCarParks);
+        // // echo "Error deleting table: " . mysqli_error($conn);
+        // // print_r($updateParkingServiceTime);
+        
+        // mysqli_query($conn, $updateParkingServiceTime);
+        // mysqli_query($conn, $updateParkingSpace);
+        // mysqli_query($conn, $updateParkingTicketing);
         if(mysqli_query($conn, $updateCarParks)&&mysqli_query($conn, $updateParkingServiceTime)&&mysqli_query($conn, $updateParkingSpace)&&mysqli_query($conn, $updateParkingTicketing)){
             echo '修改成功!<br>';
             echo "<a href='admin.php'>返回系統</a>";
-            header("refresh:32;url=index.php");
+            header("refresh:32;url=../index.php");
             
         }else{
             echo "Error deleting table: " . mysqli_error($conn);

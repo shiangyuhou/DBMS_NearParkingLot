@@ -15,20 +15,21 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Read the SQL query from file
-$sqlQuery = "SELECT * FROM CarParks limit 4;";
-// Execute the query
-$result = $conn->query($sqlQuery);
-
-// Check if the query executed successfully
-if ($result) {
-    // echo "Query executed successfully\n";
-} 
-else {
-    echo "Error executing query: " . $conn->error;
-}
+// // Read the SQL query from file
+// $sqlQuery = "SELECT * FROM CarParks limit 4;";
+// // Execute the query
+// $result = $conn->query($sqlQuery);
+// print_r($result);
+// // Check if the query executed successfully
+// if ($result) {
+//     // echo "Query executed successfully\n";
+// } 
+// else {
+//     echo "Error executing query: " . $conn->error;
+// }
     
-// Close the connection
-$conn->close();
-return $result;
+// // Close the connection
+// $conn->close();
+// return $result;
+return $conn;
 ?>

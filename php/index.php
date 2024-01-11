@@ -11,162 +11,25 @@
     <link rel="stylesheet" href="css/content.css">
     <link rel="stylesheet" href="css/card.css">
     <link rel="stylesheet" href="css/nevigator.css">
-
+    <link rel="stylesheet" href="css/map.css">
     <!-- Open Street Map -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
     <title>Login Form</title>
-    <script>
-    var map, marker, lat, lng, newMap, result_json;
-    var markers = [];
-
-    function submitForm() {
-        // Get all checked checkboxes
-        var checkboxes = document.querySelectorAll('#myForm input[type="checkbox"]:checked');
-        // Create a FormData object to store the form data
-        var formData = new FormData();
-
-        // Loop through checked checkboxes and append them to the FormData object
-        checkboxes.forEach(function(checkbox) {
-            formData.append(checkbox.name, checkbox.value);
-        });
-
-        // Use the Fetch API to make a POST request
-        fetch('query.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(jsonData => {
-            console.log(jsonData);
-            newMap = initMap(jsonData);
-            result_json = jsonData;
-            generateCards(result_json);
-
-            // return jsonData;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-
-    function generateCards(data) {
-    console.log(data);
-    // Assuming 'data' is an array of objects with the same structure as your PHP $result
-    data.forEach(function (row) {
-        var boardHr = document.createElement('div');
-        boardHr.classList.add('board__hr');
-
-        var card = document.createElement('div');
-        card.classList.add('card');
-
-        var cardAvatar = document.createElement('div');
-        cardAvatar.classList.add('card__avatar');
-
-        var cardBody = document.createElement('div');
-        cardBody.classList.add('card__body');
-
-        var cardInfo = document.createElement('div');
-        cardInfo.classList.add('card__info');
-
-        var cardContent = document.createElement('p');
-        cardContent.classList.add('card__content');
-
-        var carParkIdHeading = document.createElement('h2');
-        carParkIdHeading.textContent = 'CarParkID: ' + row['CarParkName_Zh_tw'];
-
-        var cardContent2 = document.createElement('p');
-        cardContent2.classList.add('card__content');
-
-        // Append elements to the body
-        cardBody.appendChild(cardInfo);
-        cardBody.appendChild(cardContent);
-        cardBody.appendChild(carParkIdHeading);
-        cardBody.appendChild(cardContent2);
-
-        card.appendChild(cardAvatar);
-        card.appendChild(cardBody);
-
-        // Append the elements to the document or a container element
-        document.body.appendChild(boardHr);
-        document.body.appendChild(card);
-    });
-}
-    // function handleFormSubmission() {
-    //     submitForm()
-    //         .then(result => {
-    //             // Handle the result
-    //             // var mapDiv = document.getElementById('map');
-    //             // mapDiv.parentNode.removeChild(mapDiv);
-
-    //             // // Create a new map div
-    //             // var newMapDiv = document.createElement('div');
-    //             // newMapDiv.id = 'map';
-    //             // document.body.appendChild(newMapDiv);
-
-    //             // // Reset markers array
-    //             // markers = [];
-    //             console.log('Submission successful:', result);
-    //         })
-    //         .catch(error => {
-    //             // Handle the error
-    //             console.error('Submission failed:', error);
-    //         });
-    // }
-
-
-    function initMap(jsonData) {
-        var initialCoords = jsonData.length > 0 ? jsonData[0] : { PositionLat: 0, PositionLon: 0 };
-        map = null;
-        // Initialize the map using Leaflet and OpenStreetMap
-        map = L.map('map').setView([initialCoords.PositionLat, initialCoords.PositionLon], 18);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
-
-        // Add markers for each set of coordinates in the jsonData
-        jsonData.forEach(function (data) {
-            var marker = L.marker([data.PositionLat, data.PositionLon]).addTo(map);
-            markers.push(marker);
-        });
-
-        newMap = map;
-
-        return map;
-    }
-    // function initMap() {
-    //     navigator.geolocation.watchPosition((position) => {
-    //         console.log(position.coords);
-    //         lat = position.coords.latitude;
-    //         lng = position.coords.longitude;
-            
-    //         console.log(lat);
-    //         console.log(lng);
-    //         // Initialize the map using Leaflet and OpenStreetMap
-    //         map = L.map('map').setView([lat, lng], 18);
-    //         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    //             attribution: '© OpenStreetMap contributors'
-    //         }).addTo(map);
-
-    //         // Add a marker to the map
-    //         marker = L.marker([lat, lng]).addTo(map);
-    //         newMap = map;
-    //         return map;
-    //     });
-    // }
-</script>
+    
 </head>
 
 
 <body>
+
 <main>
 <div class="board__header">
     <div class="border__word-block">
         <h1 class="board__tittle">DBMS_NearParkingLot</h1>
     </div>
     <div class="board__btn-block">
-        <a class="board__btn" href="register.php">Sign up</a>
+        <!-- <a class="board__btn" href="register.php">Sign up</a> -->
         <a class="board__btn" href="login.php">Log in</a>
         
     </div>
@@ -178,44 +41,72 @@
 <!-- <div class="board__map"></div> -->
 <div class="board__nevigator">
     <div class="board__btn-block">
-        <a class="board__btn" href="register.php">找即時</a>
+        <!-- <a class="board__btn" href="register.php">找即時</a>
         <a class="board__btn" href="login.php">找充電</a>
         <a class="board__btn" href="login.php">找月租</a>
-        <a class="board__btn" href="login.php">找其他</a>
+        <a class="board__btn" href="login.php">找其他</a> -->
     </div>
 
 </div>
-
+<div class="board__inline">
 <form id="myForm">
     <div>
         <h1><b>停車位查詢系統</b></h1>
         <br/>
         <h3><b>輸入所在地</b></h3>
         <label for="district">選擇行政區：</label>
-        <select id="district" onchange="populateTownships()">
-            <option value="" selected disabled>請選擇行政區</option>
-            <!-- 行政區選項由 JavaScript 動態生成 -->
+        <select name = "zone">
+            <option value= "基隆市" >基隆市</option>
+            <option value= "臺北市" >臺北市</option>
+            <option value= "桃園市" >桃園市</option>
+            <option value= "新竹市" >新竹市</option>
+            <option value= "苗栗縣" >苗栗縣</option>
+            <option value= "臺中市" >臺中市</option>
+            <option value= "南投縣" >南投縣</option>
+            <option value= "嘉義縣" >嘉義縣</option>
+            <option value= "嘉義市" >嘉義市</option>
+            <option value= "臺南市" >臺南市</option>
+            <option value= "高雄市" >高雄市</option>
+            <option value= "屏東縣" >屏東縣</option>
+            <option value= "臺東縣" >臺東縣</option>
+            <option value= "花蓮縣" >花蓮縣</option>
+            <option value= "宜蘭縣" >宜蘭縣</option>
+            <option value= "金門縣" >金門縣</option>
+            <option value= "連江縣" >連江縣</option>
         </select>
 
-        <label for="township">選擇鄉鎮市區：</label>
-        <select id="township">
-            <option value="" selected disabled>請先選擇行政區</option>
-            <!-- 鄉鎮市區選項由 JavaScript 動態生成 -->
-        </select>
 
         <h3><b>輸入日期與時間</b></h3>
-        <input type="datetime-local" name = "datetime">
+        <input type="date" name = "datetime">
+
+        <h3><b>使用者參考位置(GPS)</b></h3>
+        <p id="demo"></p>
+        
 
         <h3><b>輸入篩選條件</b></h3>
         <div class="table" width="800" style="color: blue;">
             <table>
                 <tbody>
+                    <tr>
+                        <td  rowspan="2" background-color:>輸入經緯度</td>
+                        <td>經度</td>
+                        <td class="options-container">
+                            <input type="text" id="long" name="long" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>緯度</td>
+                        <td class="options-container">    
+                            <input type="text" id="lat" name="lat" value="">
+                        </td>
+                    </tr>
+                    
                     <!--停車場資訊-->
                     <tr>
                         <td  rowspan="2" background-color:>停車場資訊</td>
                         <td>停車場類型</td>
                         <td class="options-container">
-                            <input type="radio" name="parkingcharacter" value="option1">不限
+                            <label><input type="radio" name="parkingcharacter" value="option1">不限</label>
                             <input type="radio" name="parkingcharacter" value="option2">平面
                             <input type="radio" name="parkingcharacter" value="option3">立體
                             <input type="radio" name="parkingcharacter" value="option4">地下
@@ -224,7 +115,7 @@
                     <tr>
                         <td>停車位類型</td>
                         <td class="options-container">
-                        <input type="radio" name="parkingtype" value="option1">不限
+                        <label><input type="radio" name="parkingtype" value="option1">不限</label>
                         <input type="radio" name="parkingtype" value="option2">機車
                         <input type="radio" name="parkingtype" value="option3">小客車
                         <input type="radio" name="parkingtype" value="option4">大客車
@@ -236,7 +127,7 @@
                         <td rowspan="1">收費方式</td>
                         <td>支付計算方式</td>
                         <td class="options-container">
-                            <input type="radio" name="frequency" value="option1">不限
+                            <label><input type="radio" name="frequency" value="option1">不限</label>
                             <input type="radio" name="frequency" value="option2">非營業期間免費
                             <input type="radio" name="frequency" value="option3">可月租
                             <input type="radio" name="frequency" value="option4">可季租
@@ -281,37 +172,25 @@
             </table>
             
         </div>
-        <input type="submit" value = "查詢">
+        <!-- <input type="submit" value = "查詢"> -->
         <button type="button" onclick="submitForm()">Submit</button>
         <!-- <button type="button" onclick="handleFormSubmission()">Submit</button> -->
     </div>
 </form>
-<div id="map" style="height: 400px;"></div>
 
-    <!-- init Map -->
-    <script>
-        // var map, marker, lat, lng, newMap;
-        // newMap = initMap();
+<div class='board__body'></div>
+</div>
+<!-- <div class="board__hr"></div>
 
-        // if (newMap === null) {
-        //     initMap();
-        // }
-        // else{
-        newMap.addTo(L.map('differentDiv'));
-        // }
-        
-    </script>
-
+<div class="board_map"> 
+    <div id="map" style="height: 400px;"></div>
+</div> -->
+<!-- < ?php $result = require_once("connect.php"); ?> -->
+<!-- < ?php require_once("content.php"); ?> -->
+<!-- 
 <div class="board__hr"></div>
+<div class="board_list"></div> -->
 
-
-<script>
-
-</script>
-<!-- <?php $result = require_once("connect.phps"); ?> -->
-<!-- <?php require_once("content.phps"); ?> -->
-
-<div class="board__hr"></div>
 
 <?php 
 
@@ -327,11 +206,21 @@
 
 <div class="board__hr"></div>
 
-<!-- map + list -->
 </div>
 
 
 
 </main>
+<!-- <script>
+    
+    window.onload = function(){
+        addMap();
+        getLocation();
+        map = initMap();
+    }; 
+</script> -->
+<script src="mapfunc.js"></script>
+<script src="locate.js"></script>
+
 </body>
 </html>

@@ -1,0 +1,9 @@
+.board__body{
+    display: block;
+    min-width: 400px;
+    width: 100%;
+}
+
+.board__inline{
+    display: flex;
+}

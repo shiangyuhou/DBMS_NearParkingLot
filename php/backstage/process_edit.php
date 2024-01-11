@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="../css/admin.css">
   <style>
         /* 隱藏類別 */
         .hidden {
@@ -14,16 +14,17 @@
 </head>
 <body>
 <?php
-$conn=require_once("config.php");
+$conn=require_once("../connect.php");
 
 if($_SERVER["REQUEST_METHOD"]==="POST"){
     
     $CarParkID=$_POST["CarParkID"];
     $CarParkName_Zh_tw=$_POST["CarParkName_Zh_tw"];
     //檢查table內是否有該筆資料
-    $checkCarParks="SELECT * FROM carparks WHERE CarParkID='$CarParkID' AND  CarParkName_Zh_tw='$CarParkName_Zh_tw'";
+    $checkCarParks="SELECT * FROM CarParks WHERE CarParkID='$CarParkID' AND  CarParkName_Zh_tw='$CarParkName_Zh_tw'";
    
     $resultCarParks=$conn->query($checkCarParks);
+    ?><script>console.log("check");</script><?php
 
     $checkParkingServiceTime="SELECT * FROM ParkingServiceTime WHERE CarParkID='$CarParkID' AND  CarParkName_Zh_tw='$CarParkName_Zh_tw'";
     $numParkingServiceTime=$conn->query($checkParkingServiceTime);
@@ -36,22 +37,26 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
     $checkParkingTicketing="SELECT * FROM ParkingTicketing WHERE CarParkID='$CarParkID' AND  CarParkName_Zh_tw='$CarParkName_Zh_tw'";
     $numParkingTicketing=$conn->query($checkParkingTicketing);
     $resultParkingTicketing=$conn->query($checkParkingTicketing);
+    
     if( mysqli_num_rows($conn->query($checkCarParks))==1 && mysqli_num_rows($numParkingServiceTime)>0 &&mysqli_num_rows($numParkingSpace)>0&&mysqli_num_rows($numParkingTicketing)>0){
             while ($rowCarParks = $resultCarParks->fetch_assoc()) {
+                // print_r($rowCarParks);
                 // Access different columns from the same row using the same $row variable
                 $OperatorID=$rowCarParks['OperatorID'];
                 $Description=$rowCarParks['Description'];
                 $CarParkType=$rowCarParks['CarParkType'];
                 $ParkingGuideType=$rowCarParks['ParkingGuideType'];
-                $CarParkPosition_PositionLat=$rowCarParks['CarParkPosition_PositionLat'];
-                $CarParkPosition_PositionLon=$rowCarParks['CarParkPosition_PositionLon'];
+                $CarParkPosition_PositionLat=$rowCarParks['PositionLat'];
+                $CarParkPosition_PositionLon=$rowCarParks['PositionLon'];
                 $Address=$rowCarParks['Address'];
                 $FareDescription=$rowCarParks['FareDescription'];
                 $IsFreeParkingOutOfHours=$rowCarParks['IsFreeParkingOutOfHours'];
                 $IsPublic=$rowCarParks['IsPublic'];
                 $IsMotorcycle=$rowCarParks['IsMotorcycle'];
+                // add
                 $OperationType=$rowCarParks['OperationType'];
-                $LiveOccuppancyAvailable=$rowCarParks['LiveOccuppancyAvailable'];
+                // 
+                $LiveOccuppancyAvailable=$rowCarParks['LiveOccupancyAvailable'];
                 $EVRechargingAvailable=$rowCarParks['EVRechargingAvailable'];
                 $MonthlyTicketAvailable=$rowCarParks['MonthlyTicketAvailable'];
                 $SeasonTicketAvailable=$rowCarParks['SeasonTicketAvailable'];
@@ -218,6 +223,7 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
             }
 
             ?>
+            <!-- <div><?php echo $ServiceDay_Monday; ?></div> -->
             <form action="edit.php" method="post">
             <h3>停車場基本資料</h3>   
             <label for="CarParkID">停車場ID:</label>
@@ -398,14 +404,14 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
             <input type="text" id="ServiceTimeDescription" style="display: block;" name="ServiceTimeDescription" value="<?php echo htmlspecialchars($ServiceTimeDescription); ?>" >
 
             <label for="ServiceDay">服務日期:</label><br>
-                <input type="checkbox" name="ServiceDay_Monday" value="1" <?php echo ($CarParkType === '1') ? 'checked' : ''; ?>> 星期一
-                <input type="checkbox" name="ServiceDay_Tuesday" value="1" <?php echo ($CarParkType === '1') ? 'checked' : ''; ?>> 星期二
-                <input type="checkbox" name="ServiceDay_Wednesday" value="1" <?php echo ($CarParkType === '1') ? 'checked' : ''; ?>> 星期三
-                <input type="checkbox" name="ServiceDay_Thursday" value="1" <?php echo ($CarParkType === '1') ? 'checked' : ''; ?>> 星期四
-                <input type="checkbox" name="ServiceDay_Friday" value="1" <?php echo ($CarParkType === '1') ? 'checked' : ''; ?>> 星期五
-                <input type="checkbox" name="ServiceDay_Saturday" value="1" <?php echo ($CarParkType === '1') ? 'checked' : ''; ?>> 星期六
-                <input type="checkbox" name="ServiceDay_Sunday" value="1" <?php echo ($CarParkType === '1') ? 'checked' : ''; ?>> 星期日
-                <input type="checkbox" name="ServiceDay_NationalHolidays" value="1" <?php echo ($CarParkType === '1') ? 'checked' : ''; ?>> 國定假日
+                <input type="checkbox" name="ServiceDay_Monday" value="1" <?php echo ($ServiceDay_Monday === '1') ? 'checked' : ''; ?>> 星期一
+                <input type="checkbox" name="ServiceDay_Tuesday" value="1" <?php echo ($ServiceDay_Tuesday === '1') ? 'checked' : ''; ?>> 星期二
+                <input type="checkbox" name="ServiceDay_Wednesday" value="1" <?php echo ($ServiceDay_Wednesday === '1') ? 'checked' : ''; ?>> 星期三
+                <input type="checkbox" name="ServiceDay_Thursday" value="1" <?php echo ($ServiceDay_Thursday === '1') ? 'checked' : ''; ?>> 星期四
+                <input type="checkbox" name="ServiceDay_Friday" value="1" <?php echo ($ServiceDay_Friday === '1') ? 'checked' : ''; ?>> 星期五
+                <input type="checkbox" name="ServiceDay_Saturday" value="1" <?php echo ($ServiceDay_Saturday === '1') ? 'checked' : ''; ?>> 星期六
+                <input type="checkbox" name="ServiceDay_Sunday" value="1" <?php echo ($ServiceDay_Sunday === '1') ? 'checked' : ''; ?>> 星期日
+                <input type="checkbox" name="ServiceDay_NationalHolidays" value="1" <?php echo ($SServiceDay_NationalHolidays === '1') ? 'checked' : ''; ?>> 國定假日
                 <br>
 
             <label for="StartTime">開始營業時間:</label><br>
@@ -718,9 +724,9 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
     else{
         echo "查無該筆資料<br>";
         echo "<a href='admin.php'>返回系統</a>";
-        header('HTTP/1.0 302 Found');
+        // header('HTTP/1.0 302 Found');
         //header("refresh:3;url=register.html",true);
-        exit;
+        // exit;
     }
 }
 

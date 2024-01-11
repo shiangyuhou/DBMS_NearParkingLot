@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($account === $validAccount && $password === $validPassword) {
             echo 'Login successful!<br>';
             echo '//redirect to admin page with some proof';
+            header("Location: ./backstage/admin.php");
         } else {
             echo 'Invalid account or password<br>';
             echo '// may be redirect to the login page again';

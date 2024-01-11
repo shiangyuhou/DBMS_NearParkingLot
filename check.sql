@@ -3,44 +3,44 @@ check every table build success or not
 */
 SELECT PositionLat, PositionLon, CarParkType, CarParkID, FareDescription
 from CarParks
-limit 20;
+limit 5;
 
 SELECT OperatorID, OperatorName_Zh_tw
 from Operator
-limit 10;
+limit 5;
 
 SELECT CarParkID, CarParkName_Zh_tw
 from ParkingAvailability
-limit 10;
+limit 5;
 
 
 SELECT CarParkID, CarParkName_Zh_tw
 from ParkingEntranceExit
-limit 10;
+limit 5;
 
 SELECT CarParkID, CarParkName_Zh_tw
 -- SELECT *
 from ParkingFacility
-limit 10;
+limit 5;
 
 SELECT CarParkID, CarParkName_Zh_tw
 from ParkingRate
-limit 10;
+limit 5;
 
 -- SELECT CarParkID, CarParkName_Zh_tw
 SELECT *
 from ParkingServiceTime
-limit 10;
+limit 5;
 
 -- SELECT CarParkID, CarParkName_Zh_tw
 SELECT *
 from ParkingSpace
-limit 10;
+limit 5;
 
 -- SELECT CarParkID, CarParkName_Zh_tw
 SELECT *
 from ParkingSpot
-limit 10;
+limit 5;
 -- SELECT * from ParkingSpot limit 10;
 /*
 {
@@ -140,4 +140,4 @@ limit 10;
 
 SELECT CarParkID, CarParkName_Zh_tw,  PaymentDescription
 from ParkingTicketing
-limit 10;
+limit 5;

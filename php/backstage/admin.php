@@ -66,6 +66,10 @@
             <h1>停車場管理系統</h1>
             
         
+        <div class="link">
+            <a href="../index.php" class="link">回首頁</a>
+        </div>
+
     </div>
   </div>
 
@@ -85,131 +89,131 @@
         <div id="homepage" style="display: block;">
             
                 <?php
-                    $conn=require_once("config.php");
+                    $conn=require_once("../connect.php");
                     //check whether the table has been CREATED
                     $tableName = "CarPark";
                     $check = $conn->query("SHOW TABLES LIKE '$tableName'");
                     if ($check->num_rows > 0) {
                         echo "<h2>Table '$tableName' exists in the database!</h2>";
                     } else {
-                        //query to CREATE table
-                        $sqlCarParks="CREATE TABLE IF NOT EXISTS CarParks ( primary key (CarParkID, CarParkName_Zh_tw),
-                                            CarParkID VARCHAR(20) NOT NULL,
-                                            CarParkName_Zh_tw VARCHAR(40) NOT NULL,
-                                            OperatorID  VARCHAR(20) NOT NULL, 
-                                            `Description` VARCHAR(255)  NOT NULL,
-                                            CarParkType INT,
-                                            ParkingGuideType INT,
-                                            CarParkPosition_PositionLat DECIMAL(10, 6)  NOT NULL,
-                                            CarParkPosition_PositionLon DECIMAL(10, 6)  NOT NULL,
-                                            `Address` VARCHAR(255)  NOT NULL,
-                                            FareDescription VARCHAR(255),
-                                            IsFreeParkingOutOfHours TINYINT,
-                                            IsPublic TINYINT,
-                                            IsMotorcycle TINYINT,
-                                            OperationType TINYINT,
-                                            LiveOccuppancyAvailable TINYINT,
-                                            EVRechargingAvailable TINYINT,
-                                            MonthlyTicketAvailable TINYINT,
-                                            SeasonTicketAvailable TINYINT,
-                                            ReservationAvailable TINYINT,
-                                            WheelchairAccessible TINYINT,
-                                            OvernightPermitted INT,
-                                            TicketMachine TINYINT,
-                                            Toilet TINYINT,
-                                            Restaurant TINYINT,
-                                            GasStation TINYINT,
-                                            Shop TINYINT,
-                                            Gated TINYINT,
-                                            Lighting TINYINT,
-                                            SecureParking TINYINT,
-                                            TicketOffice TINYINT,
-                                            ProhibitedForAnyHazardousMaterialLoads VARCHAR(20),
-                                            SecurityGuard TINYINT,
-                                            Supervision TINYINT,
-                                            City VARCHAR(255)  NOT NULL,
-                                            CityCode VARCHAR(255) NOT NULL) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
-                        $sqlParkingServiceTime="CREATE TABLE IF NOT EXISTS ParkingServiceTime (
-                            primary key (CarParkID, CarParkName_Zh_tw),
-                            CarParkID VARCHAR(20),
-                            CarParkName_Zh_tw VARCHAR(40),
-                            ServiceDay_ServiceTag VARCHAR(20),
-                            ServiceDay_Monday boolean,
-                            ServiceDay_Tuesday boolean,
-                            ServiceDay_Wednesday boolean,
-                            ServiceDay_Thursday boolean,
-                            ServiceDay_Friday boolean,
-                            ServiceDay_Saturday boolean,
-                            ServiceDay_Sunday boolean,
-                            ServiceDay_NationalHolidays boolean,
-                            `Description` VARCHAR(40),
-                            StartTime time,
-                            EndTime time,
-                            FreeOfCharge boolean
-                            -- OpeningHours VARCHAR(10000)
-                        )DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
-                        $sqlParkingSpace="CREATE TABLE IF NOT EXISTS ParkingSpace (
-                            CarParkID VARCHAR(20),
-                            CarParkName_Zh_tw VARCHAR(40),
-                            TotalSpaces int,
-                            SpaceType int,
-                            IsMechanical boolean,
-                            HasChargingPoint boolean,
-                            NumberOfSpaces int,
-                            StayType int
-                        )DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
-                        $sqlParkingTicketing="CREATE TABLE IF NOT EXISTS ParkingTicketing (
-                            CarParkID VARCHAR(20),
-                            CarParkName_Zh_tw VARCHAR(40),
-                            HasInvoice tinyint,
-                            InvoiceType_DuplicateUniform tinyint,
-                            InvoiceType_TriplicateUniform tinyint,
-                            InvoiceSupport_BANPrinted tinyint,
-                            InvoiceSupport_Donation tinyint,
-                            HasEInvoice tinyint,
-                            HasEInvoiceCarrier tinyint,
-                            EInvoiceCarrierType_Generic tinyint,
-                            EInvoiceCarrierType_SmartCard tinyint,
-                            EInvoiceCarrierType_CreditCard tinyint,
-                            EInvoiceCarrierType_DebitCard tinyint,
-                            EInvoiceCarrierType_MemberCard tinyint,
-                            EInvoiceCarrierType_DonationCode tinyint,
-                            PaymentProcess_PayAndDisplay tinyint,
-                            PaymentProcess_PayByPrepaidToken tinyint,
-                            PaymentProcess_PayAtExitBoothManualCollection tinyint,
-                            PaymentProcess_PayAtMachineOnFootPriorToExit tinyint,
-                            PaymentProcess_PayBySmartCard tinyint,
-                            PaymentProcess_PayByMobile tinyint,
-                            PaymentProcess_PayByEtag tinyint,
-                            PaymentProcess_Others tinyint,
-                            PaymentMethod_Cash tinyint,
-                            PaymentMethod_CreditCard tinyint,
-                            PaymentMethod_SmartCard tinyint,
-                            PaymentMethod_ETC tinyint,
-                            PaymentMethod_MobilePayment tinyint,
-                            PaymentMethod_Token tinyint,
-                            PaymentMethod_Others tinyint,
-                            SmartCard_EasyCard tinyint,
-                            SmartCard_IPASS tinyint,
-                            SmartCard_ICash tinyint,
-                            SmartCard_HappyCash tinyint,
-                            PaymentDescription VARCHAR(200),
-                            HasTicketingMachine tinyint,
-                            TicketingMachine_DisabledFriendly tinyint,
-                            -- TicketingMachine_Positions tinyint,
-                            HasTicketingValidator tinyint,
-                            TicketingValidatorType_Contactless tinyint,
-                            TicketingValidatorType_Magnetic tinyint,
-                            TicketingValidatorType_NFC tinyint,
-                            TicketingValidatorType_RFID tinyint,
-                            TicketingValidatorType_Others tinyint
-                        )";
-                        if(mysqli_query($conn, $sqlCarParks)&&mysqli_query($conn, $sqlParkingServiceTime)&&mysqli_query($conn, $sqlParkingSpace)&&mysqli_query($conn, $sqlParkingTicketing)){
-                            echo '<h2>The table successfully CREATED!</h2>';
+                        // //query to CREATE table
+                        // $sqlCarParks="CREATE TABLE IF NOT EXISTS CarParks ( primary key (CarParkID, CarParkName_Zh_tw),
+                        //                     CarParkID VARCHAR(20) NOT NULL,
+                        //                     CarParkName_Zh_tw VARCHAR(40) NOT NULL,
+                        //                     OperatorID  VARCHAR(20) NOT NULL, 
+                        //                     `Description` VARCHAR(255)  NOT NULL,
+                        //                     CarParkType INT,
+                        //                     ParkingGuideType INT,
+                        //                     CarParkPosition_PositionLat DECIMAL(10, 6)  NOT NULL,
+                        //                     CarParkPosition_PositionLon DECIMAL(10, 6)  NOT NULL,
+                        //                     `Address` VARCHAR(255)  NOT NULL,
+                        //                     FareDescription VARCHAR(255),
+                        //                     IsFreeParkingOutOfHours TINYINT,
+                        //                     IsPublic TINYINT,
+                        //                     IsMotorcycle TINYINT,
+                        //                     OperationType TINYINT,
+                        //                     LiveOccuppancyAvailable TINYINT,
+                        //                     EVRechargingAvailable TINYINT,
+                        //                     MonthlyTicketAvailable TINYINT,
+                        //                     SeasonTicketAvailable TINYINT,
+                        //                     ReservationAvailable TINYINT,
+                        //                     WheelchairAccessible TINYINT,
+                        //                     OvernightPermitted INT,
+                        //                     TicketMachine TINYINT,
+                        //                     Toilet TINYINT,
+                        //                     Restaurant TINYINT,
+                        //                     GasStation TINYINT,
+                        //                     Shop TINYINT,
+                        //                     Gated TINYINT,
+                        //                     Lighting TINYINT,
+                        //                     SecureParking TINYINT,
+                        //                     TicketOffice TINYINT,
+                        //                     ProhibitedForAnyHazardousMaterialLoads VARCHAR(20),
+                        //                     SecurityGuard TINYINT,
+                        //                     Supervision TINYINT,
+                        //                     City VARCHAR(255)  NOT NULL,
+                        //                     CityCode VARCHAR(255) NOT NULL) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
+                        // $sqlParkingServiceTime="CREATE TABLE IF NOT EXISTS ParkingServiceTime (
+                        //     primary key (CarParkID, CarParkName_Zh_tw),
+                        //     CarParkID VARCHAR(20),
+                        //     CarParkName_Zh_tw VARCHAR(40),
+                        //     ServiceDay_ServiceTag VARCHAR(20),
+                        //     ServiceDay_Monday boolean,
+                        //     ServiceDay_Tuesday boolean,
+                        //     ServiceDay_Wednesday boolean,
+                        //     ServiceDay_Thursday boolean,
+                        //     ServiceDay_Friday boolean,
+                        //     ServiceDay_Saturday boolean,
+                        //     ServiceDay_Sunday boolean,
+                        //     ServiceDay_NationalHolidays boolean,
+                        //     `Description` VARCHAR(40),
+                        //     StartTime time,
+                        //     EndTime time,
+                        //     FreeOfCharge boolean
+                        //     -- OpeningHours VARCHAR(10000)
+                        // )DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
+                        // $sqlParkingSpace="CREATE TABLE IF NOT EXISTS ParkingSpace (
+                        //     CarParkID VARCHAR(20),
+                        //     CarParkName_Zh_tw VARCHAR(40),
+                        //     TotalSpaces int,
+                        //     SpaceType int,
+                        //     IsMechanical boolean,
+                        //     HasChargingPoint boolean,
+                        //     NumberOfSpaces int,
+                        //     StayType int
+                        // )DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
+                        // $sqlParkingTicketing="CREATE TABLE IF NOT EXISTS ParkingTicketing (
+                        //     CarParkID VARCHAR(20),
+                        //     CarParkName_Zh_tw VARCHAR(40),
+                        //     HasInvoice tinyint,
+                        //     InvoiceType_DuplicateUniform tinyint,
+                        //     InvoiceType_TriplicateUniform tinyint,
+                        //     InvoiceSupport_BANPrinted tinyint,
+                        //     InvoiceSupport_Donation tinyint,
+                        //     HasEInvoice tinyint,
+                        //     HasEInvoiceCarrier tinyint,
+                        //     EInvoiceCarrierType_Generic tinyint,
+                        //     EInvoiceCarrierType_SmartCard tinyint,
+                        //     EInvoiceCarrierType_CreditCard tinyint,
+                        //     EInvoiceCarrierType_DebitCard tinyint,
+                        //     EInvoiceCarrierType_MemberCard tinyint,
+                        //     EInvoiceCarrierType_DonationCode tinyint,
+                        //     PaymentProcess_PayAndDisplay tinyint,
+                        //     PaymentProcess_PayByPrepaidToken tinyint,
+                        //     PaymentProcess_PayAtExitBoothManualCollection tinyint,
+                        //     PaymentProcess_PayAtMachineOnFootPriorToExit tinyint,
+                        //     PaymentProcess_PayBySmartCard tinyint,
+                        //     PaymentProcess_PayByMobile tinyint,
+                        //     PaymentProcess_PayByEtag tinyint,
+                        //     PaymentProcess_Others tinyint,
+                        //     PaymentMethod_Cash tinyint,
+                        //     PaymentMethod_CreditCard tinyint,
+                        //     PaymentMethod_SmartCard tinyint,
+                        //     PaymentMethod_ETC tinyint,
+                        //     PaymentMethod_MobilePayment tinyint,
+                        //     PaymentMethod_Token tinyint,
+                        //     PaymentMethod_Others tinyint,
+                        //     SmartCard_EasyCard tinyint,
+                        //     SmartCard_IPASS tinyint,
+                        //     SmartCard_ICash tinyint,
+                        //     SmartCard_HappyCash tinyint,
+                        //     PaymentDescription VARCHAR(200),
+                        //     HasTicketingMachine tinyint,
+                        //     TicketingMachine_DisabledFriendly tinyint,
+                        //     -- TicketingMachine_Positions tinyint,
+                        //     HasTicketingValidator tinyint,
+                        //     TicketingValidatorType_Contactless tinyint,
+                        //     TicketingValidatorType_Magnetic tinyint,
+                        //     TicketingValidatorType_NFC tinyint,
+                        //     TicketingValidatorType_RFID tinyint,
+                        //     TicketingValidatorType_Others tinyint
+                        // )";
+                        // if(mysqli_query($conn, $sqlCarParks)&&mysqli_query($conn, $sqlParkingServiceTime)&&mysqli_query($conn, $sqlParkingSpace)&&mysqli_query($conn, $sqlParkingTicketing)){
+                        //     echo '<h2>The table successfully CREATED!</h2>';
                             
-                        }else{
-                            echo "<h2>Error creating table: </h2>" . mysqli_error($conn);
-                        }
+                        // }else{
+                        //     echo "<h2>Error creating table: </h2>" . mysqli_error($conn);
+                        // }
                     }
                     mysqli_close($conn);
                     

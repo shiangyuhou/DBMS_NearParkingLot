@@ -125,14 +125,14 @@ CREATE TABLE IF NOT EXISTS ParkingRate (
     MinHalfHourCharge VARCHAR(5),
     StartTime VARCHAR(10),
     EndTime VARCHAR(10),
-    ServiceDay_Monday VARCHAR(3),
-    ServiceDay_Tuesday VARCHAR(3),
-    ServiceDay_Wednesday VARCHAR(3),
-    ServiceDay_Thursday VARCHAR(3),
-    ServiceDay_Friday VARCHAR(3),
-    ServiceDay_Saturday VARCHAR(3),
-    ServiceDay_Sunday VARCHAR(3),
-    ServiceDay_NationalHolidays VARCHAR(3)
+    ServiceDay_Monday boolean,
+    ServiceDay_Tuesday boolean,
+    ServiceDay_Wednesday boolean,
+    ServiceDay_Thursday boolean,
+    ServiceDay_Friday boolean,
+    ServiceDay_Saturday boolean,
+    ServiceDay_Sunday boolean,
+    ServiceDay_NationalHolidays boolean
     
     -- RestrictionUserType tinyint DEFAULT 0,
     -- SpaceType tinyint DEFAULT 0,

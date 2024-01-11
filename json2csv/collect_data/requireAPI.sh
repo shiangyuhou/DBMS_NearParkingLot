@@ -3,8 +3,8 @@ TOKEN=$2
 # read -p "input the place to store:" root
 mkdir -p $root
 # read "input the token" TOKEN
-echo $TOKEN
-echo "complete"
+# echo $TOKEN
+# echo "complete"
 
 # ------------------------------------------------------------------------------------------------------------------
 list1=(ParkingAvailabilities CarParks ParkingFacilities Operators ParkingEntranceExits ParkingRates ServiceTimes ParkingSpaces Ticketings ParkingSpotAvailabilities ParkingSpots)
