@@ -99,9 +99,12 @@ function generateCards(data) {
 
         var carParkIdHeading = document.createElement('h2');
         carParkIdHeading.textContent =  row['CarParkName_Zh_tw'];
-
+        
         var carParkAddress = document.createElement('div');
         carParkAddress.textContent =  row['Address'];
+
+        var carParkPaymentDescription = document.createElement('div');
+        carParkPaymentDescription.textContent =  "支援: " + row['PaymentDescription'];
 
         var cardContent2 = document.createElement('p');
         cardContent2.classList.add('card__content');
@@ -111,6 +114,7 @@ function generateCards(data) {
         cardBody.appendChild(cardContent);
         cardBody.appendChild(carParkIdHeading);
         cardBody.appendChild(carParkAddress);
+        cardBody.appendChild(carParkPaymentDescription);
         cardBody.appendChild(cardContent2);
 
         card.appendChild(cardAvatar);

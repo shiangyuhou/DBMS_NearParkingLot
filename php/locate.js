@@ -23,10 +23,10 @@ function showPosition(position) {
     // Add more CSS properties as needed
 }
     
-window.onload = function(){
+// window.onload = function(){
     addMap();
     getLocation();
     map = initialMap();
-}; 
+// }; 
 
 // getLocation();

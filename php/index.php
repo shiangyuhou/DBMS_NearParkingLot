@@ -219,8 +219,8 @@
         map = initMap();
     }; 
 </script> -->
-<script src="locate.js"></script>
 <script src="mapfunc.js"></script>
+<script src="locate.js"></script>
 
 </body>
 </html>

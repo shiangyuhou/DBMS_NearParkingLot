@@ -4,7 +4,13 @@
   padding: 0;
   /* border: 1px solid gold; */
 }
+#lat{
+  max-width: 80px;
+}
+#long{
+  max-width: 80px;
 
+}
 .options-container label {
   width: 100%;
   display: block;
