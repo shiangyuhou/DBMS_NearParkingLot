@@ -17,6 +17,28 @@
   margin-bottom: 5px; /* Adjust as needed */
 }
 
+.card{
+  display: flex;
+}
+
+.card__body{
+  width: 70%;
+}
+
+.card__remain{
+  width: 20%;
+}
+
+.card_remainText{
+
+}
+
+.card_remainNum{
+
+}
+
+
+
 .options-container input {
   max-width: 10px;
 }

@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS CarParks (
     SecurityGuard tinyint ,
     Supervision tinyint ,
     City VARCHAR(255),
-    CityCode VARCHAR(255)
+    CityCode VARCHAR(3)
 );
 
 CREATE TABLE IF NOT EXISTS Operator (
@@ -187,6 +187,7 @@ CREATE TABLE IF NOT EXISTS ParkingSpace (
 
 
 CREATE TABLE IF NOT EXISTS ParkingSpot (
+    primary key (CarParkID, CarParkName_Zh_tw),
     CarParkID VARCHAR(20),
     CarParkName_Zh_tw VARCHAR(40),
     ParkingSpotID VARCHAR(20),
@@ -197,6 +198,7 @@ CREATE TABLE IF NOT EXISTS ParkingSpot (
 
 
 CREATE TABLE IF NOT EXISTS ParkingSpotAvailability (
+    primary key (CarParkID, CarParkName_Zh_tw),
     CarParkID VARCHAR(20),
     CarParkName_Zh_tw VARCHAR(40),
     ParkingSpotID VARCHAR(20),
@@ -211,6 +213,7 @@ CREATE TABLE IF NOT EXISTS ParkingSpotAvailability (
 );
 
 CREATE TABLE IF NOT EXISTS ParkingTicketing (
+    primary key (CarParkID, CarParkName_Zh_tw),
     CarParkID VARCHAR(20),
     CarParkName_Zh_tw VARCHAR(40),
     HasInvoice tinyint,

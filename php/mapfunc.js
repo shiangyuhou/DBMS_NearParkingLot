@@ -39,26 +39,9 @@ function removeContent(){
     head.remove();
 }
 function submitForm() {
-    // Get all checked checkboxes
     var formElements  = document.querySelectorAll('#myForm input[type="checkbox"]:checked, #myForm input[type="radio"]:checked, #myForm input[type="text"], #myForm input[type="date"]');
-    // var districts = document.querySelectorAll('#myForm input[type="radio"]:checked');
-    // Create a FormData object to store the form data
-    // var formData = new FormData();
-
-    // Loop through checked checkboxes and append them to the FormData object
-    // checkboxes.forEach(function(checkbox) {
-    //     formData.append(checkbox.name, checkbox.value);
-    // });
     var formData = new FormData();
     formElements.forEach(function(element) {
-        // if (element.type === 'checkbox' || element.type === 'radio') {
-        //     formData.append(element.name, element.value);
-        // } else {
-        //     formData.append(element.name, element.value);
-        // }
-        // var selectElement = document.getElementsByName('zone')[0];
-        // var selectedValue = selectElement.options[selectElement.selectedIndex].value;
-        // formData.append("zone", selectedValue);
             if (element.type === 'checkbox' || element.type === 'radio') {
                 formData.append(element.name, element.value);
             }
@@ -67,29 +50,24 @@ function submitForm() {
             }
     });
     var selectElement = document.getElementById("district");
-    // Get the selected value
     var selectedValue = selectElement.value;
     formData.append("zone", selectedValue);
     console.log("zone" + formData.get("zone"));
     console.log("long" + formData.get("long"));
-    // formData.append(checkbox.name, checkbox.value);
-
 
     // Use the Fetch API to make a POST request
     fetch('query.php', {
         method: 'POST',
         body: formData
     })
+    // .then(response => response.text())
     .then(response => response.json())
     .then(jsonData => {
         console.log(jsonData);
-        // generateCards(result_json);
         removeContent();
         generateContent(jsonData);
         if(map){map.remove();}
         map = initMap(jsonData);
-        // result_json = jsonData;
-    
     })
     .catch(error => {
         console.error('Error:', error);
@@ -108,8 +86,16 @@ function generateCards(data) {
         var boardHr = document.createElement('div');
         boardHr.classList.add('board__hr');
 
+        // --------------------
+
+
         var card = document.createElement('div');
         card.classList.add('card');
+
+        var cardRemain = document.createElement('div');
+        cardRemain.classList.add('card__remain');
+
+        // --------------------
 
         var cardAvatar = document.createElement('div');
         cardAvatar.classList.add('card__avatar');
@@ -135,6 +121,18 @@ function generateCards(data) {
         var cardContent2 = document.createElement('p');
         cardContent2.classList.add('card__content');
 
+        // --------------------
+
+        var cardRemainText = document.createElement('div');
+        cardRemainText.classList.add("card_remainText");
+        cardRemainText.textContent =  "剩餘車位: ";
+
+        var cardRemainNum = document.createElement('div');
+        cardRemainNum.classList.add("card_remainNum");
+        cardRemainNum.textContent =  (row['AvailableSpaces'] == null)?"?":row['AvailableSpaces'];
+
+        // --------------------
+
         // Append elements to the body
         cardBody.appendChild(cardInfo);
         cardBody.appendChild(cardContent);
@@ -143,8 +141,12 @@ function generateCards(data) {
         cardBody.appendChild(carParkPaymentDescription);
         cardBody.appendChild(cardContent2);
 
+        cardRemain.appendChild(cardRemainText);
+        cardRemain.appendChild(cardRemainNum);
+
         card.appendChild(cardAvatar);
         card.appendChild(cardBody);
+        card.appendChild(cardRemain);
 
         list.appendChild(card);
         // Append the elements to the document or a container element
