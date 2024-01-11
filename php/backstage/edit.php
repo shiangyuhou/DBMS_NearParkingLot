@@ -119,9 +119,9 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
             ParkingGuideType='$ParkingGuideType',
             
             
-//             IsFreeParkingOutOfHours='$IsFreeParkingOutOfHours',
-//             IsPublic='$IsPublic',
-//             OperationType='$OperationType',
+-- //             IsFreeParkingOutOfHours='$IsFreeParkingOutOfHours',
+-- //             IsPublic='$IsPublic',
+-- //             OperationType='$OperationType',
             PositionLat='$CarParkPosition_PositionLat',
             PositionLon='$CarParkPosition_PositionLon',
             `Address`='$Address',FareDescription='$FareDescription',
@@ -133,19 +133,19 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
             ReservationAvailable='$ReservationAvailable',
             WheelchairAccessible='$WheelchairAccessible',
             OvernightPermitted='$OvernightPermitted',
-            /add
+            -- /add
             TicketMachine='$TicketMachine',
             Toilet='$Toilet',
             Restaurant='$Restaurant',
             GasStation='$GasStation',
             Shop='$Shop',
-            // add
+            -- // add
             Gated='$Gated',
             TicketOffice='$TicketOffice',
             ProhibitedForAnyHazardousMaterialLoads='$ProhibitedForAnyHazardousMaterialLoads',
             City='$City',
-            CityCode='$CityCode'
-            // 
+            CityCode='$CityCode',
+            -- // 
             Lighting='$Lighting',
             SecureParking='$SecureParking',
             SecurityGuard='$SecurityGuard',
